@@ -10,7 +10,7 @@ set(APP_DESC "An lxqt-panel Plugin to let you avoid hitting")
 set(APP_DESC "${APP_DESC} an empty tank of drive space.")
 
 set(APP_VERSION "26.08.23")
-set(APP_VERSION_MINOR "47")
+set(APP_VERSION_MINOR "48")
 
 set(APP_AUTHOR "Mark James Capella")
 set(ORG_NAME "skyrmion.inc")

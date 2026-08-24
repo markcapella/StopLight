@@ -31,7 +31,6 @@
 ConfigDialog::ConfigDialog(StopLight* stopLight,
     PluginSettings* settings, QWidget* parent) : QDialog(parent),
     ui(new Ui::ConfigDialog), mSettings(settings) {
-    cout << "ConfigDialog CONSTRUCTOR() Starts." << endl;
 
     mStopLight = stopLight;
 
@@ -107,8 +106,6 @@ ConfigDialog::ConfigDialog(StopLight* stopLight,
 
     // Init settings change list, size / value.
     mSettingChanges.fill(false, PROPERTIES.size());
-
-    cout << "ConfigDialog CONSTRUCTOR() Finishes." << endl;
 }
 
 /**
@@ -123,14 +120,11 @@ ConfigDialog::~ConfigDialog() {
  */
 void
 ConfigDialog::showEvent(QShowEvent* event) {
-    cout << "showEvent() Starts." << endl;
-
     loadConfigDialog();
     mSettingChanges.fill(false);
     mApplyButton->setEnabled(false);
 
     QDialog::showEvent(event);
-    cout << "showEvent() Finishes." << endl;
 }
 
 /**
@@ -138,9 +132,8 @@ ConfigDialog::showEvent(QShowEvent* event) {
  */
 void
 ConfigDialog::createConfigDialog() {
-    cout << "createConfigDialog() Starts." << endl;
-
     const int SETTINGS_SIZE = PROPERTIES.size();
+
     for (int i = 0; i < SETTINGS_SIZE; i++) {
         const SettingsProperty THIS_SETTING = PROPERTIES[i];
         const QString THIS_KEY = THIS_SETTING.name;
@@ -289,7 +282,6 @@ ConfigDialog::createConfigDialog() {
             }
         }
     }
-    cout << "createConfigDialog() Finishes." << endl;
 }
 
 /**
@@ -297,8 +289,6 @@ ConfigDialog::createConfigDialog() {
  */
 void
 ConfigDialog::translateConfigDialog() {
-    cout << "translateConfigDialog() Starts." << endl;
-
     // Setup window title, 
     QString TITLE = QString(APP_NAME) + " " + gTranslationHelper->
         getTranslationOf("Configuration", getStringSetting(APP_LANGUAGE));
@@ -345,8 +335,6 @@ ConfigDialog::translateConfigDialog() {
     mOkButton->clearFocus();
     mApplyButton->clearFocus();
     mCancelButton->clearFocus();
-
-    cout << "translateConfigDialog() Finishes." << endl;
 }
 
 /**
@@ -354,9 +342,8 @@ ConfigDialog::translateConfigDialog() {
  */
 void
 ConfigDialog::loadConfigDialog() {
-    cout << "loadConfigDialog() Starts." << endl;
-
     const int FORM_LAYOUT_SIZE = mFormLayout->rowCount();
+
     for (int i = 0; i < FORM_LAYOUT_SIZE; ++i) {
         const SettingsProperty THIS_SETTING = PROPERTIES[i];
         const QString THIS_KEY = THIS_SETTING.name;
@@ -421,8 +408,6 @@ ConfigDialog::loadConfigDialog() {
             continue;
         }
     }
-
-    cout << "loadConfigDialog() Finishes." << endl;
 }
 
 /**
@@ -430,9 +415,8 @@ ConfigDialog::loadConfigDialog() {
  */
 void
 ConfigDialog::loadConfigDialogWithDefaults() {
-    cout << "loadConfigDialog() Starts." << endl;
-
     const int FORM_LAYOUT_SIZE = mFormLayout->rowCount();
+
     for (int i = 0; i < FORM_LAYOUT_SIZE; ++i) {
         const SettingsProperty THIS_SETTING = PROPERTIES[i];
         const QString THIS_KEY = THIS_SETTING.name;
@@ -501,8 +485,6 @@ ConfigDialog::loadConfigDialogWithDefaults() {
             continue;
         }
     }
-
-    cout << "loadConfigDialog() Finishes." << endl;
 }
 
 /**
@@ -510,8 +492,6 @@ ConfigDialog::loadConfigDialogWithDefaults() {
  */
 void
 ConfigDialog::updateConfigDialog() {
-    cout << "updateConfigDialog() Starts." << endl;
-    cout << "updateConfigDialog() Finishes." << endl;
 }
 
 /**
@@ -519,12 +499,10 @@ ConfigDialog::updateConfigDialog() {
  */
 void
 ConfigDialog::okConfigDialog() {
-    cout << "okConfigDialog() Starts." << endl;
     acceptConfigDialog();
 
     // Finish "Ok".
     accept();
-    cout << "okConfigDialog() Finishes." << endl;
 }
 
 /**
@@ -532,9 +510,8 @@ ConfigDialog::okConfigDialog() {
  */
 void
 ConfigDialog::acceptConfigDialog() {
-    cout << "acceptConfigDialog() Starts." << endl;
-
     const int FORM_LAYOUT_SIZE = mFormLayout->rowCount();
+
     for (int i = 0; i < FORM_LAYOUT_SIZE; ++i) {
         const SettingsProperty THIS_SETTING = PROPERTIES[i];
         const QString THIS_KEY = THIS_SETTING.name;
@@ -623,8 +600,6 @@ ConfigDialog::acceptConfigDialog() {
         mApplyButton->setIcon(QIcon());
         mCancelButton->setIcon(QIcon());
     }
-
-    cout << "acceptConfigDialog() Finishes." << endl;
 }
 
 /**
@@ -632,9 +607,7 @@ ConfigDialog::acceptConfigDialog() {
  */
 void
 ConfigDialog::accept() {
-    cout << "accept() Starts." << endl;
     QDialog::accept();
-    cout << "accept() Finishes." << endl;
 }
 
 /**
@@ -642,9 +615,7 @@ ConfigDialog::accept() {
  */
 void
 ConfigDialog::cancelConfigDialog() {
-    cout << "cancelConfigDialog() Starts." << endl;
     QDialog::reject();
-    cout << "cancelConfigDialog() Finishes." << endl;
 }
 
 /**
@@ -652,13 +623,11 @@ ConfigDialog::cancelConfigDialog() {
  */
 void
 ConfigDialog::resetConfigDialog() {
-    cout << "resetConfigDialog() Starts." << endl;
-
     loadConfigDialogWithDefaults();
-    mSettingChanges.fill(true);
-    mApplyButton->setEnabled(true);
 
-    cout << "resetConfigDialog() Finishes." << endl;
+    mSettingChanges.fill(true);
+
+    mApplyButton->setEnabled(true);
 }
 
 /**
@@ -666,12 +635,8 @@ ConfigDialog::resetConfigDialog() {
  */
 void
 ConfigDialog::showAboutDialog() {
-    cout << "showAboutDialog() Starts." << endl;
-
     mAboutDialog = new AboutDialog(mSettings, this);
     mAboutDialog->show();
-
-    cout << "showAboutDialog() Finishes." << endl;
 }
 
 /**
