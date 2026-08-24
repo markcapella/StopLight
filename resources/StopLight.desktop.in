@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Service
+ServiceTypes=LXQtPanel/Plugin
+
+Name=StopLight
+Comment=StopLight indicator
+Icon=stoplight

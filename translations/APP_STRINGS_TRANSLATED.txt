@@ -1,0 +1,159 @@
+"About"
+Über
+Acerca de
+À propos
+Informazioni
+約
+Over
+Sobre
+О
+
+"An lxqt-panel Plugin to let you avoid hitting an empty tank of drive space."
+Ein lxqt-Panel-Plugin, das es Ihnen ermöglicht, einen leeren Speicherplatz auf dem Laufwerk zu vermeiden.
+Un complemento de lxqt-panel que te permite evitar quedarte sin espacio en el disco.
+Un plugin pour lxqt-panel qui vous permet d’éviter de tomber sur un disque dur plein.
+Un plugin per lxqt-panel che ti permette di evitare di finire lo spazio su disco.
+空のドライブ容量にぶつかるのを避けられる lxqt-panel プラグイン
+Een lxqt-panel plugin om te voorkomen dat je een lege schijfruimte tegenkomt.
+Um plugin do lxqt-panel que permite evitar atingir um tanque vazio de espaço em disco.
+Плагин lxqt-панели, позволяющий избегать столкновения с пустым дисковым пространством.
+
+"Apply"
+Anwenden
+Aplicar
+Appliquer
+Applicare
+適用する
+Toepassen
+Aplicar
+Применить
+
+"Cancel"
+Stornieren
+Cancelar
+Annuler
+Cancellare
+キャンセル
+Annuleren
+Cancelar
+Отмена
+
+"Configuration"
+Konfiguration
+Configuración
+Configuration
+Configurazione
+構成
+Configuratie
+Configuração
+Конфигурация
+
+"Icon artwork provided by"
+Symbolgrafik bereitgestellt von
+Arte de icono proporcionado por
+Illustration d'icône fournie par
+Illustrazione dell'icona fornita da
+アイコンのアートワーク提供者
+Pictogramkunst geleverd door
+Arte do ícone fornecida por
+Иконка предоставлена
+
+"Language"
+Sprache
+Idioma
+Langue
+Lingua
+言語
+Taal
+Linguagem
+Язык
+
+"Ok"
+Ok
+Ok
+Ok
+Ok
+「オーケー」
+Oké
+Ok
+Ок
+
+"Repo"
+Repo
+Repositorio
+Dépôt
+Repo
+リポ
+Repo
+Repositório
+репозиторий
+
+"Reset"
+Zurücksetzen
+Restablecer
+Réinitialiser
+Reimposta
+リセット
+Resetten
+Redefinir
+Сброс
+
+"Show Green Indicator"
+Grünes Symbol anzeigen
+Mostrar indicador verde
+Afficher l'indicateur vert
+Mostra indicatore verde
+緑のインジケーターを表示
+Toon groen indicator
+Mostrar Indicador Verde
+Показать зелёный индикатор
+
+"Show Red Indicator"
+Rote Anzeige anzeigen
+Mostrar indicador rojo
+Afficher l'indicateur rouge
+Mostra indicatore rosso
+赤いインジケーターを表示
+Toon rood indicator
+Mostrar Indicador Vermelho
+Показать красный индикатор
+
+"Show Red when equal or less than"
+Rot anzeigen, wenn gleich oder kleiner als
+Mostrar rojo cuando sea igual o menor que
+Afficher le rouge lorsqu'il est égal ou inférieur à
+Mostra rosso quando è uguale o inferiore a
+以下の場合は赤色を表示
+Toon rood wanneer gelijk aan of kleiner dan
+Mostrar vermelho quando igual ou menor que
+Показывать красный цвет, если он равен или меньше
+
+"Show Text Indicator"
+Textanzeige anzeigen
+Mostrar indicador de texto
+Afficher l'indicateur de texte
+Mostra indicatore di testo
+テキスト表示インジケーター
+Toon tekstindicator
+Mostrar Indicador de Texto
+Показать индикатор текста
+
+"Show Yellow Indicator"
+Gelben Indikator anzeigen
+Mostrar indicador amarillo
+Afficher l'indicateur jaune
+Mostra indicatore giallo
+黄色のインジケーターを表示
+Toon geel indicator
+Mostrar indicador amarelo
+Показать жёлтый индикатор
+
+"Show Yellow when equal or less than"
+"Gelb anzeigen, wenn gleich oder kleiner als"
+Mostrar amarillo cuando sea igual o menor que
+Afficher en jaune lorsque égal ou inférieur à
+Mostra giallo quando uguale o minore di
+等しいかそれ以下の場合は黄色を表示
+Geel tonen wanneer gelijk aan of minder dan
+"Mostrar Amarelo quando for igual ou menor que"
+Показывать жёлтый, когда равно или меньше

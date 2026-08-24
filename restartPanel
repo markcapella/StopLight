@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+nohup sh -c 'killall lxqt-panel; sleep 1; lxqt-panel' \
+    >> /dev/null 2>&1 &
