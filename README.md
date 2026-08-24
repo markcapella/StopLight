@@ -1,27 +1,26 @@
 # StopLight
     
-!['StopLightIcon'](https://github.com/markcapella/StopLight/blob/main/StopLight.png)
+!['StopLightIcon'](https://github.com/markcapella/StopLight/blob/main/resources/stoplight.png)
+
 !['StopLight'](https://github.com/markcapella/StopLight/blob/main/screenshot.png)
 
-    
 ## Description
 
->     StopLight 🚦 is an LXQT Panel plugin Widget that monitors your base SSD
+> StopLight 🚦 is an LXQT Panel plugin Widget that monitors your base SSD
 > or hard drive, and provides an indicator that reports available space in
 > Green, Yellow or Red warning colors. Warning levels & more are configurable.
 >
->    Running an SSD completely full can cause surprisingly serious problems
+> Running an SSD completely full can cause surprisingly serious problems
 > on Linux, although the SSD itself usually isn't physically damaged.
 >
->    Always run the StopLight! 😎️
+> Always run the StopLight! 😎️
 >
->    Once the filesystem has no blocks available, operations start
-> returning no space left on device and that can cascade.
+> Once the filesystem has no blocks available, operations start returning
+> no space left on device and that can cascade. Eventually you can wind up
+> with a system that boots but behaves very strangely, or in worse cases
+> has trouble completing boot !
 >
->    Eventually you can wind up with a system that boots but behaves
-> very strangely, or in worse cases has trouble completing boot.
->
->    Protect against login lock-out, & install StopLight today !
+> Protect against login lock-out, & install StopLight today !
 
 ## List of Horribles.
 
@@ -41,34 +40,26 @@
 
 > This is automated. The build system will warn you of missing packages.
 
-### Clone StopLight source folder.
-
+### Clone StopLight source folder, and cd into it.
     git clone https://github.com/markcapella/StopLight
-
-### CD into source repo.
-
     cd StopLight
 
 ## Basic development.
-
-'''bash
+```bash
 ./startPlugin
-'''
-'''bash
+```
+```bash
 ./buildPlugin
-'''
-'''bash
-./installPlugin
-./restartPanel
-'''
-'''bash
+```
+```bash
+./installPlugin && ./restartPanel
+```
+```bash
 ./uninstallPlugin
-'''
-'''bash
+```
+```bash
 ./cleanPlugin
-rm -rf ~/.config/StopLight
-'''
-
+```
 ## Usage after install.
 
 ### LXQT Desktop with lxqt-panel.
@@ -76,7 +67,7 @@ rm -rf ~/.config/StopLight
 > Right click the panel and select "Manage Widgets".
 >
 > From the displayed Configure Panel dialog, select the right-hand
-> side green Plus button "+" to open the "Add Plugins" dialog.
+> side green Plus button "➕" to open the "Add Plugins" dialog.
 >
 > Select StopLight from the list and click the "add Widget" button.
 
