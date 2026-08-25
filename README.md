@@ -1,6 +1,6 @@
 # StopLight
     
-!['StopLightIcon'](https://github.com/markcapella/StopLight/blob/main/resources/stoplight.png)
+<img src="resources/stoplight.png" alt="drawing" width="150"/>
 
 !['StopLight'](https://github.com/markcapella/StopLight/blob/main/screenshot.png)
 
