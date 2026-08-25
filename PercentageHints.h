@@ -1,13 +1,12 @@
 
 #pragma once
 
-// App forward decls.
-class ConfigDialog;
-class StopLightView;
-
 // Qt Headers.
 #include <QEvent>
 #include <QToolTip>
+
+// Qt6 forward decls.
+class QSlider;
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-parameter"
@@ -22,8 +21,10 @@ struct PercentageHints : public QObject {
          * Constructor.
          */
         PercentageHints(QSlider* slider) :
-             QObject(slider), s(slider) { }
+             QObject(slider), s(slider) {
+        }
 
+    protected:
         /**
          * Catch events to trigger hover info.
          */
@@ -54,6 +55,7 @@ struct PercentageHints : public QObject {
     private:
         // Members.
         QSlider* s = nullptr;
+
 };
 
 #pragma GCC diagnostic pop

@@ -3,14 +3,14 @@
 #
 set(APP_NAME "StopLight")
 
-string(TOLOWER "${APP_NAME}" ICON_NAME)
-set(ICON_PATH "share/icons/hicolor/scalable/apps")
+string(TOLOWER "${APP_NAME}" APP_ICON)
+set(APP_ICON_PATH "share/icons/hicolor/scalable/apps")
 
-set(APP_DESC "An lxqt-panel Plugin to let you avoid hitting")
-set(APP_DESC "${APP_DESC} an empty tank of drive space.")
+set(APP_DESC "Provides an indicator & warning dialogs about")
+set(APP_DESC "${APP_DESC} your system Free Space (🔴, 🟡, 🟢).")
 
-set(APP_VERSION "26.08.23")
-set(APP_VERSION_MINOR "48")
+set(APP_VERSION "26.08.26")
+set(APP_VERSION_MINOR "00")
 
 set(APP_AUTHOR "Mark James Capella")
 set(ORG_NAME "skyrmion.inc")
@@ -154,13 +154,13 @@ endif()
 #
 set(HEADERS Globals.h
     StopLight.h StopLightView.h StopLightPluginLibrary.h
-    ConfigDialog.h AboutDialog.h
+    ConfigDialog.h AboutDialog.h YellowDialog.h RedDialog.h
     TranslationHelper.h TranslationHelperStrings.h
 )
 
 set(SOURCES Globals.cpp
     StopLight.cpp StopLightView.cpp StopLightPluginLibrary.cpp
-    ConfigDialog.cpp AboutDialog.cpp
+    ConfigDialog.cpp AboutDialog.cpp YellowDialog.cpp RedDialog.cpp
     TranslationHelper.cpp
 )
 
@@ -180,8 +180,8 @@ target_compile_definitions(${PLUGIN} PRIVATE
     APP_AUTHOR="${APP_AUTHOR}"
     ORG_NAME="${ORG_NAME}"
     SOURCE_REPO="${SOURCE_REPO}"
-    ICON_NAME="${ICON_NAME}"
-    ICON_PATH="${CMAKE_INSTALL_PREFIX}/${ICON_PATH}"
+    APP_ICON="${APP_ICON}"
+    APP_ICON_PATH="${CMAKE_INSTALL_PREFIX}/${APP_ICON_PATH}"
 )
 
 ##
@@ -195,17 +195,20 @@ target_link_libraries(${PLUGIN} Qt6::Widgets lxqt ${LIBRARIES}
 #
 # Debug #1.
 #
-# target_compile_options(${PLUGIN} PRIVATE
-#     -g -O1 -Wall -Wextra -Wuninitialized -Wmaybe-uninitialized)
+#target_compile_options(${PLUGIN} PRIVATE
+#    -g -O1 -Wall -Wextra -Wuninitialized -Wmaybe-uninitialized
+#)
 #
-# Debug #2.
+# Debug #2 as Sanitizer build.
+#
+# Then use startPanelWithSanitizerBuild for debugging leaks.
 #
 #target_compile_options(${PLUGIN} PUBLIC
 #    -g -O1 -fsanitize=address -fno-omit-frame-pointer)
 #target_link_options(${PLUGIN} PUBLIC -fsanitize=address)
 
 ##
-# Install plugin.
+# Install plugin .desktop.
 #
 install(TARGETS ${PLUGIN} LIBRARY DESTINATION
     ${CMAKE_INSTALL_LIBDIR}/lxqt-panel)
@@ -213,10 +216,13 @@ install(TARGETS ${PLUGIN} LIBRARY DESTINATION
 configure_file(resources/${APP_NAME}.desktop.in
     ${CMAKE_CURRENT_BINARY_DIR}/${APP_NAME}.desktop @ONLY)
 
+##
+# Install plugin Icon.
+#
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${APP_NAME}.desktop
     DESTINATION ${CMAKE_INSTALL_DATADIR}/lxqt/lxqt-panel)
 
-install(FILES resources/${ICON_NAME}.png DESTINATION
+install(FILES resources/${APP_ICON}.png DESTINATION
     ${CMAKE_INSTALL_DATADIR}/icons/hicolor/scalable/apps)
 
 ##

@@ -2,8 +2,10 @@
 #pragma once
 
 // App forward decls.
-class StopLight;
 class ConfigDialog;
+class StopLight;
+class RedDialog;
+class YellowDialog;
 
 // Qt6 headers.
 #include <QLabel>
@@ -13,9 +15,12 @@ class QPainter;
 class QResizeEvent;
 class QTimer;
 
+// LXQT forward decls.
+class PluginSettings;
+
 /**
- * The main panel plugin view is a basic colored indicator (🟢, 🔴, 🟡)
- * with optional text % value inside.
+ * The main panel plugin view is a basic colored indicator
+ * (🔴, 🟡. 🟢) with optional freeSpace%. 
  */
 class StopLightView : public QLabel {
     Q_OBJECT
@@ -25,7 +30,7 @@ class StopLightView : public QLabel {
          * Constructor.
          */
         explicit StopLightView(StopLight* stopLight,
-            QWidget* parent = nullptr);
+            PluginSettings* settings, QWidget* parent = nullptr);
 
         /**
          * Destructor & cleanup.
@@ -37,6 +42,18 @@ class StopLightView : public QLabel {
          */
         void updateTimerInterval();
 
+    protected:
+        /**
+         * Resize event resizes us.
+         */
+        void resizeEvent(QResizeEvent* event) override;
+
+    public:
+        /**
+         * Redraw the view after configuration changes.
+         */
+        void redrawAfterConfigChanges();
+
         /**
          * Update the plugin view with maybe new size.
          */
@@ -44,34 +61,67 @@ class StopLightView : public QLabel {
 
     protected:
         /**
-         * Resize event resizes us.
-         */
-        void resizeEvent(QResizeEvent* event) override;
-
-        /**
          * Paint event redraws the whole indicator view.
          */
         void paintEvent(QPaintEvent* event) override;
 
     private:
-        // Members.
-        StopLight* mStopLight = nullptr;
-        QTimer* mCheckSpaceTimer = nullptr;
-
-        /**
-         * Draws the StopLight Icon
-         */
-        void drawIconAsIndicator(QPainter& painter);
-
         /**
          * Maybe draw colored indicators.
          */
         void drawIndicator(QPainter& painter);
 
         /**
-         * Maybe draw Freespace text.
+         * Determine if green indicator level is reached & able
+         * to be displayed.
+         */
+        bool isGreenIndicatorVisible();
+
+        /**
+         * Does our free space amount fall into the green level.
+         */
+        bool isGreenIndicatorLevel();
+
+        /**
+         * Determine if yellow indicator level is reached & able
+         * to be displayed.
+         */
+        bool isYellowIndicatorLevel();
+
+        /**
+         * Does our free space amount fall into the yellow level.
+         */
+        bool isYellowIndicatorVisible();
+
+        /**
+         * Determine if red indicator level able to be displayed.
+         */
+        bool isRedIndicatorVisible();
+
+        /**
+         * Does our free space amount fall into the red level.
+         */
+        bool isRedIndicatorLevel();
+
+        /**
+         * Maybe draw the Freespace text indicator.
          */
         void drawTextIndicator(QPainter& painter);
+
+        /**
+         * Determine if should draw the Freespace text indicator.
+         */
+        bool shouldDrawTextIndicator();
+
+        /**
+         * Maybe draw app icon indicator.
+         */
+        void drawIconAsIndicator(QPainter& painter);
+
+        /**
+         * Determine if should draw the app icon indicator.
+         */
+        bool shouldDrawIconIndicator();
 
         /**
          * Returns a QRect with the position & size of our desired
@@ -83,4 +133,16 @@ class StopLightView : public QLabel {
          * Retrieves freespace info of the system root volume.
          */
         int getFreeSpaceAsPercent();
+
+        /**
+         * Members.
+         */
+        StopLight* mStopLight = nullptr;
+        PluginSettings* mSettings;
+
+        QTimer* mCheckSpaceTimer = nullptr;
+
+        YellowDialog* mYellowDialog = nullptr;
+        RedDialog* mRedDialog = nullptr;
+
 };

@@ -55,9 +55,7 @@ class StopLight : public QObject, public ILXQtPanelPlugin {
          * "Grouped" or "non-separate" items shrink small into
          * multi rows if the panel becomes configured that way.
          */
-        bool isSeparate() const override {
-            return true;
-        }
+        bool isSeparate() const override;
 
         /**
          * Declare we have a ConfigDialog.
@@ -73,4 +71,5 @@ class StopLight : public QObject, public ILXQtPanelPlugin {
 
     private:
         // Members.
+
 };

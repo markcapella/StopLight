@@ -4,11 +4,13 @@
 // App headers.
 #include "Globals.h"
 #include "TranslationHelper.h"
-#include "TranslationHelperStrings.h"
 
 // Qt Headers.
 #include <QEvent>
 #include <QToolTip>
+
+// Qt6 forward decls.
+class QSlider;
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-parameter"
@@ -22,12 +24,11 @@ struct MinutesHints : public QObject {
         /**
          * Constructor.
          */
-        MinutesHints(ConfigDialog* configDialog, QSlider* slider) :
+        MinutesHints(QSlider* slider) :
             QObject(slider), s(slider) {
-
-            gConfigDialog = configDialog;
         }
 
+    protected:
         /**
          * Catch events to trigger hover info.
          */
@@ -74,6 +75,7 @@ struct MinutesHints : public QObject {
     private:
         // Members.
         QSlider* s = nullptr;
+
 };
 
 #pragma GCC diagnostic pop

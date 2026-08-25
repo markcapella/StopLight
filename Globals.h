@@ -6,9 +6,9 @@
  */
 
 // App headers.
-#include "ConfigDialog.h"
-#include "StopLightView.h"
-#include "TranslationHelper.h"
+class ConfigDialog;
+class StopLightView;
+class TranslationHelper;
 
 // Globals.
 extern ConfigDialog* gConfigDialog;

@@ -4,36 +4,43 @@
 #include "AboutDialog.h"
 
 #include "ConfigDialog.h"
-#include "TranslationHelper.h"
 
 // C Headers.
 #include <iostream>
 using namespace std;
 
 // Qt Headers.
+#include <QCloseEvent>
 #include <QDesktopServices>
 #include <QDialogButtonBox>
 #include <QLabel>
 #include <QPushButton>
 #include <QVBoxLayout>
 
+// LXQt Headers.
+#include <lxqt/pluginsettings.h>
+
 /**
  * Simple class to represent an AboutDialog.
- *
  */
 AboutDialog::AboutDialog(PluginSettings* settings,
     ConfigDialog* parent) : QDialog(parent) {
+    setMinimumWidth(600);
 
+    // Save App ref.
     mSettings = settings;
 
+    // Set title & icon.
+    setWindowFlags(Qt::Dialog | Qt::Tool);
     setWindowTitle(gTranslationHelper->getTranslationOf("About",
         gConfigDialog->getStringSetting(ConfigDialog::
         APP_LANGUAGE)) + QString(" ") + mSettings->group());
-    setMinimumWidth(600);
+    setWindowIcon(QIcon::fromTheme(APP_ICON));
 
     // Create overall container.
     QVBoxLayout* mainLayout = new QVBoxLayout(this);
     mainLayout->setSpacing(0);
+    mainLayout->addSpacing(20);
 
     // App title line.
     QLabel* appTitleLine = new QLabel(QString(APP_NAME), this);
@@ -110,7 +117,7 @@ AboutDialog::AboutDialog(PluginSettings* settings,
 
     // Create Ok / Cancel ButtonBoxBox with a Repo button.
     const bool SHOULD_DISPLAY_ICONS = gConfigDialog->
-        getBoolSetting(ConfigDialog::ICONS_ON_BUTTONS);
+        getBoolSetting(ConfigDialog::SHOW_ICONS_ON_BUTTONS);
 
     QDialogButtonBox* buttonBox = new QDialogButtonBox(
         QDialogButtonBox::Ok, this);
@@ -139,8 +146,7 @@ AboutDialog::AboutDialog(PluginSettings* settings,
     connect(buttonBox, &QDialogButtonBox::accepted, this,
         &QDialog::accept);
     connect(repoButton, &QPushButton::clicked, this, [this]() {
-        const bool OPENED = QDesktopServices::openUrl(
-            QUrl(QStringLiteral(SOURCE_REPO)));
+        QDesktopServices::openUrl(QUrl(QStringLiteral(SOURCE_REPO)));
         this->close();
     });
 

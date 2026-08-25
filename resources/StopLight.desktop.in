@@ -2,6 +2,6 @@
 Type=Service
 ServiceTypes=LXQtPanel/Plugin
 
-Name=StopLight
-Comment=StopLight indicator
-Icon=stoplight
+Name=@APP_NAME@
+Comment=@APP_DESC@
+Icon=@APP_ICON@

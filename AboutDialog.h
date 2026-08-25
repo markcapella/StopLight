@@ -4,17 +4,21 @@
 // App headers.
 #include "TranslationHelper.h"
 
-// Qt Headers.
-#include <QCloseEvent>
-#include <QDialog>
-#include <QWidget>
+// App forward decls.
+class ConfigDialog;
 
-// LXQT Headers.
-#include <lxqt/pluginsettings.h>
+// Qt Headers.
+#include <QDialog>
+
+// Qt6 forward decls.
+class QCloseEvent;
+class QWidget;
+
+// LXQT forward decls.
+class PluginSettings;
 
 /**
  * Simple class to represent an AboutDialog.
- *
  */
 class AboutDialog : public QDialog {
     Q_OBJECT

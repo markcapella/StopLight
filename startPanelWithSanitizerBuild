@@ -1,3 +1,4 @@
+
 #!/usr/bin/env bash
 
 # Color styling.
@@ -18,15 +19,17 @@ COLOR_WHITE=$(getColorCode setaf 7)
 TEXT_BOLD=$(getColorCode bold)
 
 ##
-# buildPlugin
+# startPanelWithSanitizerBuild
 #
     echo
-    echo  -e "${COLOR_GREEN}""Restarting LxQt Panel.""${COLOR_NORMAL}"
+    echo  -e "${COLOR_GREEN}""Starting LxQt Panel for sanitizer testing.""${COLOR_NORMAL}"
 
-    nohup sh -c 'killall lxqt-panel; sleep 1; lxqt-panel' \
-        >> /dev/null 2>&1 &
+    killall lxqt-panel
+    sleep 1
+
+    LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libasan.so.8 lxqt-panel
     RESULT=$?
 
     echo
-    echo -e "${COLOR_GREEN}""Restart LxQt Panel complete.""${COLOR_NORMAL}"
+    echo -e "${COLOR_GREEN}""LxQt Panel sanitizer testing is complete.""${COLOR_NORMAL}"
     exit "$RESULT"

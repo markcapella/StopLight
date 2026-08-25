@@ -2,10 +2,10 @@
 // App headers.
 #include "ConfigDialog.h"
 #include "TranslationHelper.h"
-#include "TranslationHelperStrings.h"
 
 // C Headers.
 #include <iostream>
+using namespace std;
 
 /**
  * TranslationHelper takes an english string and returns

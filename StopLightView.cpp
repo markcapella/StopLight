@@ -4,8 +4,10 @@
 #include "StopLightView.h"
 
 #include "ConfigDialog.h"
+#include "RedDialog.h"
 #include "StopLight.h"
 #include "TranslationHelper.h"
+#include "YellowDialog.h"
 
 // C headers.
 #include <iomanip>
@@ -18,21 +20,37 @@
 #include <QTimer>
 
 /**
- * The main panel plugin view is a basic colored indicator (🟢, 🔴, 🟡)
- * with optional text % value inside.
+ * The main panel plugin view is a basic colored indicator
+ * (🔴, 🟡. 🟢) with optional freeSpace%. 
  */
-StopLightView::StopLightView(StopLight* stopLight, QWidget* parent) :
-    QLabel(parent) {
+StopLightView::StopLightView(StopLight* stopLight,
+    PluginSettings* settings, QWidget* parent) : QLabel(parent) {
 
     // Save App ref.
     mStopLight = stopLight;
+    mSettings = settings;
 
     // Create & start Size Change timer.
     mCheckSpaceTimer = new QTimer(this);
     const int UPDATE_INTERVAL = gConfigDialog->getIntSetting(
         ConfigDialog::INDICATOR_UPDATE_MINS) * 60 * 1000;
     mCheckSpaceTimer->setInterval(UPDATE_INTERVAL);
+
     connect(mCheckSpaceTimer, &QTimer::timeout, this, [this]() {
+        if (isYellowIndicatorVisible() && gConfigDialog->
+            getBoolSetting(ConfigDialog::SHOW_YELLOW_DIALOG)) {
+            if (!mYellowDialog || !mYellowDialog->isVisible()) {
+                mYellowDialog = new YellowDialog(mSettings);
+                mYellowDialog->show();
+            }
+        }
+        if (isRedIndicatorVisible() && gConfigDialog->
+            getBoolSetting(ConfigDialog::SHOW_RED_DIALOG)) {
+            if (!mRedDialog || !mRedDialog->isVisible()) {
+                mRedDialog = new RedDialog(mSettings);
+                mRedDialog->show();
+            }
+        }
         update();
     });
     mCheckSpaceTimer->start();
@@ -60,24 +78,6 @@ StopLightView::updateTimerInterval() {
 }
 
 /**
- * Update the plugin view with maybe new size.
- */
-void
-StopLightView::setPluginWidth() {
-    // Get desired width squared down from height.
-    const int HEIGHT = height();
-
-    const int MARGIN_WIDTH_PCT = gConfigDialog->
-        getIntSetting(ConfigDialog::INDICATOR_MARGIN_SIZE);
-    const int WIDTH_PLUS_MARGIN = MARGIN_WIDTH_PCT == 0 ?
-        HEIGHT : HEIGHT + (HEIGHT * MARGIN_WIDTH_PCT / 100);
-
-    if (this->width() != WIDTH_PLUS_MARGIN) {
-        setFixedWidth(WIDTH_PLUS_MARGIN);
-    }
-}
-
-/**
  * Resize event resizes us.
  */
 void
@@ -85,6 +85,49 @@ StopLightView::resizeEvent(QResizeEvent* event) {
     setPluginWidth();
 
     QLabel::resizeEvent(event);
+}
+
+/**
+ * Redraw the view after configuration changes.
+ */
+void
+StopLightView::redrawAfterConfigChanges() {
+    updateTimerInterval();
+
+    setPluginWidth();
+
+    mStopLight->pluginFlagsChanged();
+
+    updateGeometry();
+    update();
+}
+
+/**
+ * Update the plugin view with maybe new size.
+ */
+void
+StopLightView::setPluginWidth() {
+    // Get desired width squared down from height.
+    const int MARGIN_WIDTH_PCT = gConfigDialog->getIntSetting(
+        ConfigDialog::INDICATOR_MARGIN_SIZE);
+    const int HEIGHT = height();
+
+    int newWidthSize = (MARGIN_WIDTH_PCT == 0) ?
+        HEIGHT : HEIGHT + (HEIGHT * MARGIN_WIDTH_PCT / 100);
+
+    const bool SHOW_ICON_INDICATOR = gConfigDialog->getBoolSetting(
+        ConfigDialog::SHOW_ICON_INDICATOR);
+    const bool SHOW_TEXT_INDICATOR = gConfigDialog->getBoolSetting(
+        ConfigDialog::SHOW_TEXT_INDICATOR);
+    if (!SHOW_ICON_INDICATOR && !SHOW_TEXT_INDICATOR &&
+        !isGreenIndicatorVisible() && !isYellowIndicatorVisible() &&
+        !isRedIndicatorVisible()) {
+        newWidthSize = 0;
+    }
+
+    if (this->width() != newWidthSize) {
+        setFixedWidth(newWidthSize);
+    }
 }
 
 /**
@@ -97,39 +140,14 @@ StopLightView::paintEvent(QPaintEvent* event) {
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
 
-    // If widget called to show no indicators(?!), show Icon.
-    { const bool SHOW_GREEN = gConfigDialog->getBoolSetting(
-          ConfigDialog::SHOW_GREEN_INDICATOR);
-      const bool SHOW_YELLOW = gConfigDialog->getBoolSetting(
-          ConfigDialog::SHOW_YELLOW_INDICATOR);
-      const bool SHOW_RED = gConfigDialog->getBoolSetting(
-          ConfigDialog::SHOW_RED_INDICATOR);
-      const bool SHOW_TEXT = gConfigDialog->getBoolSetting(
-          ConfigDialog::SHOW_TEXT_INDICATOR);
-      if (!SHOW_GREEN && !SHOW_YELLOW && !SHOW_RED && !SHOW_TEXT) {
-          drawIconAsIndicator(painter);
-          return;
-      }
-    }
-
     // Maybe draw colored indicators.
     drawIndicator(painter);
 
     // Maybe draw Freespace text.
     drawTextIndicator(painter);
-}
 
-
-/**
- * If widget called to show no indicators(?!), show Icon.
- */
-void
-StopLightView::drawIconAsIndicator(QPainter& painter) {
-    // Get textIndicator metrics & rect.
-    const QRectF INDICATOR_RECT = getIndicatorRect();
-
-    gConfigDialog->windowIcon().paint(&painter,
-        INDICATOR_RECT.toRect(),Qt::AlignCenter);
+    // Maybe draw app icon indicator.
+    drawIconAsIndicator(painter);
 }
 
 /**
@@ -137,58 +155,124 @@ StopLightView::drawIconAsIndicator(QPainter& painter) {
  */
 void
 StopLightView::drawIndicator(QPainter& painter) {
-    // Determine current free space.
-    const int FREE_SPACE = getFreeSpaceAsPercent();
-
-    // If we're green status.
-    const int YELLOW_THRESHOLD = gConfigDialog->getIntSetting(
-        ConfigDialog::YELLOW_INDICATOR_THRESHOLD);
-    if (FREE_SPACE > YELLOW_THRESHOLD) {
-        if (gConfigDialog->getBoolSetting(
-            ConfigDialog::SHOW_GREEN_INDICATOR)) {
-            painter.setPen(Qt::NoPen);
-            painter.setBrush(Qt::green);
-            painter.drawEllipse(getIndicatorRect());
-        }
+    // Green status?
+    if (isGreenIndicatorVisible()) {
+        painter.setPen(Qt::NoPen);
+        painter.setBrush(Qt::green);
+        painter.drawEllipse(getIndicatorRect());
+        return;
+    }
+    
+    if (isYellowIndicatorVisible()) {
+        painter.setPen(Qt::NoPen);
+        painter.setBrush(Qt::yellow);
+        painter.drawEllipse(getIndicatorRect());
         return;
     }
 
-    // If we're yellow status.
-    const int RED_THRESHOLD = gConfigDialog->getIntSetting(
-        ConfigDialog::RED_INDICATOR_THRESHOLD);
-    if (FREE_SPACE > RED_THRESHOLD) {
-        if (gConfigDialog->getBoolSetting(
-            ConfigDialog::SHOW_YELLOW_INDICATOR)) {
-            painter.setPen(Qt::NoPen);
-            painter.setBrush(Qt::yellow);
-            painter.drawEllipse(getIndicatorRect());
-        }
-        return;
-    }
-
-    // We're red status.
-    if (gConfigDialog->getBoolSetting(
-        ConfigDialog::SHOW_RED_INDICATOR)) {
+    if (isRedIndicatorVisible()) {
         painter.setPen(Qt::NoPen);
         painter.setBrush(Qt::red);
         painter.drawEllipse(getIndicatorRect());
+        return;
     }
 }
 
 /**
- * Maybe draw Freespace text.
+ * Determine if green indicator level is reached & able
+ * to be displayed.
+ */
+bool
+StopLightView::isGreenIndicatorVisible() {
+    // If we're green status.
+    const bool SHOW_GREEN_INDICATOR = gConfigDialog->getBoolSetting(
+        ConfigDialog::SHOW_GREEN_INDICATOR);
+    const bool AT_GREEN_LEVEL = isGreenIndicatorLevel();
+
+    return SHOW_GREEN_INDICATOR && AT_GREEN_LEVEL;
+}
+
+/**
+ * Does our free space amount fall into the green level.
+ */
+bool
+StopLightView::isGreenIndicatorLevel() {
+    const int FREE_SPACE = getFreeSpaceAsPercent();
+
+    const int SHOW_YELLOW_AT_THRESHOLD = gConfigDialog->getIntSetting(
+        ConfigDialog::SHOW_YELLOW_AT_THRESHOLD);
+
+    return FREE_SPACE > SHOW_YELLOW_AT_THRESHOLD;
+}
+
+/**
+ * Determine if yellow indicator level is reached & able
+ * to be displayed.
+ */
+bool
+StopLightView::isYellowIndicatorVisible() {
+    // If we're yellow status.
+    const bool SHOW_YELLOW_INDICATOR = gConfigDialog->getBoolSetting(
+        ConfigDialog::SHOW_YELLOW_INDICATOR);
+    const bool AT_YELLOW_LEVEL = isYellowIndicatorLevel();
+
+    return SHOW_YELLOW_INDICATOR && AT_YELLOW_LEVEL;
+}
+
+/**
+ * Does our free space amount fall into the yellow level.
+ */
+bool
+StopLightView::isYellowIndicatorLevel() {
+    const int FREE_SPACE = getFreeSpaceAsPercent();
+
+    const int SHOW_YELLOW_AT_THRESHOLD = gConfigDialog->getIntSetting(
+        ConfigDialog::SHOW_YELLOW_AT_THRESHOLD);
+    const int SHOW_RED_AT_THRESHOLD = gConfigDialog->getIntSetting(
+        ConfigDialog::SHOW_RED_AT_THRESHOLD);
+
+    return FREE_SPACE <= SHOW_YELLOW_AT_THRESHOLD &&
+        FREE_SPACE > SHOW_RED_AT_THRESHOLD;
+}
+
+/**
+ * Determine if red indicator level is able to be displayed.
+ */
+bool
+StopLightView::isRedIndicatorVisible() {
+    // If we're red status.
+    const bool SHOW_RED_INDICATOR = gConfigDialog->getBoolSetting(
+        ConfigDialog::SHOW_RED_INDICATOR);
+    const bool AT_RED_LEVEL = isRedIndicatorLevel();
+
+    return SHOW_RED_INDICATOR && AT_RED_LEVEL;
+}
+
+/**
+ * Does our free space amount fall into the red level.
+ */
+bool
+StopLightView::isRedIndicatorLevel() {
+    const int FREE_SPACE = getFreeSpaceAsPercent();
+
+    const int SHOW_RED_AT_THRESHOLD = gConfigDialog->getIntSetting(
+        ConfigDialog::SHOW_RED_AT_THRESHOLD);
+
+    return FREE_SPACE <= SHOW_RED_AT_THRESHOLD;
+}
+
+/**
+ * Maybe draw the Freespace text indicator.
  */
 void
 StopLightView::drawTextIndicator(QPainter& painter) {
-    if (!gConfigDialog->getBoolSetting(ConfigDialog::
-        SHOW_TEXT_INDICATOR)) {
+    if (!shouldDrawTextIndicator()) {
         return;
     }
 
     // Determine current free space, and indicator text.
     const int FREE_SPACE = getFreeSpaceAsPercent();
     const QString INDICATOR_TEXT = QString::number(FREE_SPACE) + "%";
-
 
     const int WIDTH = width();
     const int HEIGHT = height();
@@ -221,6 +305,58 @@ StopLightView::drawTextIndicator(QPainter& painter) {
     painter.setPen(Qt::black);
     painter.drawText(INDICATOR_RECT, Qt::AlignCenter,
         INDICATOR_TEXT);
+}
+
+/**
+ * Determine if should draw the Freespace text indicator.
+ */
+bool
+StopLightView::shouldDrawTextIndicator() {
+    const bool SHOW_GREEN_TEXT = gConfigDialog->getBoolSetting(
+        ConfigDialog::SHOW_GREEN_TEXT);
+    const bool SHOW_YELLOW_TEXT = gConfigDialog->getBoolSetting(
+        ConfigDialog::SHOW_YELLOW_TEXT);
+    const bool SHOW_RED_TEXT = gConfigDialog->getBoolSetting(
+        ConfigDialog::SHOW_RED_TEXT);
+
+    const bool SHOW_TEXT_INDICATOR = gConfigDialog->getBoolSetting(
+        ConfigDialog::SHOW_TEXT_INDICATOR);
+
+    return SHOW_TEXT_INDICATOR ||
+        (isGreenIndicatorVisible() && SHOW_GREEN_TEXT) ||
+        (isYellowIndicatorVisible() && SHOW_YELLOW_TEXT) ||
+        (isRedIndicatorVisible() && SHOW_RED_TEXT);
+}
+
+/**
+ * Maybe draw app icon indicator.
+ */
+void
+StopLightView::drawIconAsIndicator(QPainter& painter) {
+    if (!shouldDrawIconIndicator()) {
+        // TODO: Empty view, shorten to width 0;
+        return;
+    }
+
+    // Get textIndicator metrics & rect.
+    const QRectF INDICATOR_RECT = getIndicatorRect();
+    gConfigDialog->windowIcon().paint(&painter,INDICATOR_RECT.toRect(),
+        Qt::AlignCenter);
+}
+
+/**
+ * Determine if should draw the app icon indicator.
+ */
+bool
+StopLightView::shouldDrawIconIndicator() {
+    const bool SHOW_TEXT_INDICATOR = gConfigDialog->getBoolSetting(
+        ConfigDialog::SHOW_TEXT_INDICATOR);
+    const bool SHOW_ICON_INDICATOR = gConfigDialog->getBoolSetting(
+        ConfigDialog::SHOW_ICON_INDICATOR);
+
+    return SHOW_ICON_INDICATOR &&
+        !isGreenIndicatorVisible() && !isYellowIndicatorVisible() &&
+        !isRedIndicatorVisible() && !SHOW_TEXT_INDICATOR;
 }
 
 /**

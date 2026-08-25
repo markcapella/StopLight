@@ -25,4 +25,8 @@ class StopLightPluginLibrary : public QObject,
          */
         ILXQtPanelPlugin* instance(const
             ILXQtPanelPluginStartupInfo& startupInfo) const override;
+
+        private:
+            // Members.
+
 };

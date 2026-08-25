@@ -17,6 +17,8 @@
 class TranslationHelper {
 
     public:
+        #include "TranslationHelperStrings.h"
+
         /**
          * Constructor.
          */
@@ -30,4 +32,5 @@ class TranslationHelper {
 
     private:
         // Members.
+
 };

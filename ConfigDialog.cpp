@@ -7,13 +7,15 @@
 #include "ComboboxDelegate.h"
 #include "MinutesHints.h"
 #include "PercentageHints.h"
+#include "SettingsDescriptionHints.h"
+#include "StopLightView.h"
 #include "TranslationHelper.h"
-#include "TranslationHelperStrings.h"
 #include "ui_ConfigDialog.h"
 
 // C Headers.
 #include <cstdio>
 #include <iostream>
+using namespace std;
 
 // Qt Headers.
 #include <QCheckBox>
@@ -26,26 +28,28 @@
 #include <lxqt/pluginsettings.h>
 
 /**
- *
+ * StopLight configuration dialog.
  */
 ConfigDialog::ConfigDialog(StopLight* stopLight,
     PluginSettings* settings, QWidget* parent) : QDialog(parent),
     ui(new Ui::ConfigDialog), mSettings(settings) {
 
+    // Save App ref.
     mStopLight = stopLight;
 
+    // Set window flags & resize.
+    ui->setupUi(this);
     setWindowFlags(Qt::Dialog | Qt::Tool);
     resize(CONFIG_DIALOG_WIDTH, CONFIG_DIALOG_HEIGHT);
     setFixedSize(size());
 
-    // Setup window title.
+    // Set title & icon.
     QString TITLE = mSettings->group() + " " + gTranslationHelper->
         getTranslationOf("Configuration", getStringSetting(APP_LANGUAGE));
     setWindowTitle(QString(TITLE));
-    setWindowIcon(QIcon::fromTheme(ICON_NAME));
+    setWindowIcon(QIcon::fromTheme(APP_ICON));
 
     // Set the window attributes, create controls & center.
-    ui->setupUi(this);
     mMainLayout = ui->mMainLayout;
     mFormLayout = ui->mFormLayout;
     createConfigDialog();
@@ -64,7 +68,7 @@ ConfigDialog::ConfigDialog(StopLight* stopLight,
     mApplyButton->setAutoDefault(false);
     mCancelButton->setAutoDefault(false);
 
-    const bool SHOULD_DISPLAY_ICONS = getBoolSetting(ICONS_ON_BUTTONS);
+    const bool SHOULD_DISPLAY_ICONS = getBoolSetting(SHOW_ICONS_ON_BUTTONS);
     if (SHOULD_DISPLAY_ICONS) {
         mResetButton->setIcon(QIcon::fromTheme("edit-undo"));
         mAboutButton->setIcon(QIcon::fromTheme("help-about"));
@@ -109,14 +113,14 @@ ConfigDialog::ConfigDialog(StopLight* stopLight,
 }
 
 /**
- *
+ * Destructor.
  */
 ConfigDialog::~ConfigDialog() {
     delete ui;
 }
 
 /**
- *
+ * Catch ShowEvent as "re-init Config Dialog"
  */
 void
 ConfigDialog::showEvent(QShowEvent* event) {
@@ -134,24 +138,40 @@ void
 ConfigDialog::createConfigDialog() {
     const int SETTINGS_SIZE = PROPERTIES.size();
 
+    const QString LANGUAGE_FOR_I18N = getStringSetting(APP_LANGUAGE);
+
+    const QString MINUTE = gTranslationHelper->getTranslationOf(
+        "minute", LANGUAGE_FOR_I18N);
+    const QString MINUTES = gTranslationHelper->getTranslationOf(
+        "minutes", LANGUAGE_FOR_I18N);
+
     for (int i = 0; i < SETTINGS_SIZE; i++) {
         const SettingsProperty THIS_SETTING = PROPERTIES[i];
+
         const QString THIS_KEY = THIS_SETTING.name;
-        const SettingsPropertyType THIS_VALUETYPE =
-            THIS_SETTING.valueType;
-        const QString I18N_DISPLAY_KEY = gTranslationHelper->
-            getTranslationOf(THIS_KEY, getStringSetting(APP_LANGUAGE));
+        const QString THIS_HINT = THIS_SETTING.hint;
+        const SettingsPropertyType THIS_VALUETYPE = THIS_SETTING.valueType;
+
+        const QString THIS_I18N_KEY = gTranslationHelper->
+            getTranslationOf(THIS_KEY, LANGUAGE_FOR_I18N);
 
         // Get QCheckBox for Booleans.
         if (THIS_VALUETYPE == BOOL_VALUETYPE) {
             QCheckBox* checkboxWidget = new QCheckBox(this);
             checkboxWidget->setObjectName(THIS_KEY);
-            mFormLayout->addRow(I18N_DISPLAY_KEY, checkboxWidget);
+            mFormLayout->addRow(THIS_I18N_KEY, checkboxWidget);
             connect(checkboxWidget, &QCheckBox::toggled,
-                this, [this, i] (bool checked) { Q_UNUSED(checked);
+                this, [=, this] (bool checked) {
+                Q_UNUSED(checked);
                 mSettingChanges[i] = true;
                 mApplyButton->setEnabled(true);
             });
+            QLabel* I_LABEL = qobject_cast<QLabel*>(mFormLayout->
+                labelForField(checkboxWidget));
+            if (I_LABEL) {
+                I_LABEL->installEventFilter(
+                    new SettingsDescriptionHints(THIS_HINT));
+            }
             continue;
         }
 
@@ -170,12 +190,19 @@ ConfigDialog::createConfigDialog() {
             QLineEdit* lineEditWidget = new QLineEdit(this);
             lineEditWidget->setObjectName(THIS_KEY);
             lineEditWidget->setFixedWidth(120);
-            mFormLayout->addRow(I18N_DISPLAY_KEY, lineEditWidget);
+            mFormLayout->addRow(THIS_I18N_KEY, lineEditWidget);
             connect(lineEditWidget, &QLineEdit::textChanged,
-                this, [this, i] (const QString &text) { Q_UNUSED(text);
+                this, [=, this] (const QString &text) {
+                Q_UNUSED(text);
                 mSettingChanges[i] = true;
                 mApplyButton->setEnabled(true);
-            }); 
+            });
+            QLabel* I_LABEL = qobject_cast<QLabel*>(mFormLayout->
+                labelForField(lineEditWidget));
+            if (I_LABEL) {
+                I_LABEL->installEventFilter(
+                    new SettingsDescriptionHints(THIS_HINT));
+            }
             continue;
         }
 
@@ -185,14 +212,21 @@ ConfigDialog::createConfigDialog() {
             QComboBox* langComboWidget = new QComboBox(this);
             langComboWidget->setItemDelegate(new ComboboxDelegate(
                 langComboWidget));
-            langComboWidget->addItems(ALL_LANGUAGES);
+            langComboWidget->addItems(TranslationHelper::ALL_LANGUAGES);
             langComboWidget->setObjectName(THIS_KEY);
-            mFormLayout->addRow(I18N_DISPLAY_KEY, langComboWidget);
+            mFormLayout->addRow(THIS_I18N_KEY, langComboWidget);
             connect(langComboWidget,&QComboBox::currentIndexChanged,
-                this, [this, i] (int index) { Q_UNUSED(index);
+                this, [=, this] (int index) {
+                Q_UNUSED(index);
                 mSettingChanges[i] = true;
                 mApplyButton->setEnabled(true);
             });
+            QLabel* I_LABEL = qobject_cast<QLabel*>(mFormLayout->
+                labelForField(langComboWidget));
+            if (I_LABEL) {
+                I_LABEL->installEventFilter(
+                    new SettingsDescriptionHints(THIS_HINT));
+            }
             continue;
         }
 
@@ -201,50 +235,61 @@ ConfigDialog::createConfigDialog() {
             QSlider* sliderEditWidget = new QSlider(Qt::Horizontal, this);
             sliderEditWidget->setObjectName(THIS_KEY);
             sliderEditWidget->setFixedWidth(160);
-            mFormLayout->addRow(I18N_DISPLAY_KEY, sliderEditWidget);
+            mFormLayout->addRow(THIS_I18N_KEY, sliderEditWidget);
 
             // Nice tooltip on slow hover of PCT hints.
             if (THIS_KEY == INDICATOR_MARGIN_SIZE ||
                 THIS_KEY == INDICATOR_SIZE ||
                 THIS_KEY == INDICATOR_TEXT_SIZE) {
                 connect(sliderEditWidget, &QSlider::valueChanged,
-                    this, [this, i, sliderEditWidget] (int value) {
+                    this, [=, this] (int value) {
                     const QString TOOLTIP_TEXT = QString::number(value) + "%";
                     QToolTip::showText(QCursor::pos(), TOOLTIP_TEXT,
                         sliderEditWidget);
                     mSettingChanges[i] = true;
                     mApplyButton->setEnabled(true);
                 });
+                QLabel* I_LABEL = qobject_cast<QLabel*>(mFormLayout->
+                    labelForField(sliderEditWidget));
+                if (I_LABEL) {
+                    I_LABEL->installEventFilter(
+                        new SettingsDescriptionHints(THIS_HINT));
+                }
                 sliderEditWidget->installEventFilter(
                     new PercentageHints(sliderEditWidget));
                 continue;
             }
 
             // Nice tooltip on slow hover.
-            if (THIS_KEY == YELLOW_INDICATOR_THRESHOLD) {
+            if (THIS_KEY == SHOW_YELLOW_AT_THRESHOLD) {
                 connect(sliderEditWidget, &QSlider::valueChanged,
-                    this, [this, i, sliderEditWidget] (int value) {
+                    this, [=, this] (int value) {
                     const QString TOOLTIP_TEXT = QString::number(value) + "%";
                     QToolTip::showText(QCursor::pos(), TOOLTIP_TEXT,
                         sliderEditWidget);
                     mSettingChanges[i] = true;
                     mApplyButton->setEnabled(true);
-
                     QSlider* RED_WIDGET = findChild<QSlider*>
-                        (RED_INDICATOR_THRESHOLD);
+                        (SHOW_RED_AT_THRESHOLD);
                     if (value < RED_WIDGET->sliderPosition()) {
                         RED_WIDGET->setSliderPosition(value);
                     }
                 });
+                QLabel* I_LABEL = qobject_cast<QLabel*>(mFormLayout->
+                    labelForField(sliderEditWidget));
+                if (I_LABEL) {
+                    I_LABEL->installEventFilter(
+                        new SettingsDescriptionHints(THIS_HINT));
+                }
                 sliderEditWidget->installEventFilter(
                     new PercentageHints(sliderEditWidget));
                 continue;
             }
 
             // Nice tooltip on slow hover.
-            if (THIS_KEY == RED_INDICATOR_THRESHOLD) {
+            if (THIS_KEY == SHOW_RED_AT_THRESHOLD) {
                 connect(sliderEditWidget, &QSlider::valueChanged,
-                    this, [this, i, sliderEditWidget] (int value) {
+                    this, [=, this] (int value) {
                     const QString TOOLTIP_TEXT = QString::number(value) + "%";
                     QToolTip::showText(QCursor::pos(), TOOLTIP_TEXT,
                         sliderEditWidget);
@@ -252,11 +297,17 @@ ConfigDialog::createConfigDialog() {
                     mApplyButton->setEnabled(true);
 
                     QSlider* YELLOW_WIDGET = findChild<QSlider*>
-                        (YELLOW_INDICATOR_THRESHOLD);
+                        (SHOW_YELLOW_AT_THRESHOLD);
                     if (value > YELLOW_WIDGET->sliderPosition()) {
                         YELLOW_WIDGET->setSliderPosition(value);
                     }
                 });
+                QLabel* I_LABEL = qobject_cast<QLabel*>(mFormLayout->
+                    labelForField(sliderEditWidget));
+                if (I_LABEL) {
+                    I_LABEL->installEventFilter(
+                        new SettingsDescriptionHints(THIS_HINT));
+                }
                 sliderEditWidget->installEventFilter(
                     new PercentageHints(sliderEditWidget));
                 continue;
@@ -265,10 +316,9 @@ ConfigDialog::createConfigDialog() {
             // Nice tooltip on slow hover of Minutes hints.
             if (THIS_KEY == INDICATOR_UPDATE_MINS) {
                 connect(sliderEditWidget, &QSlider::valueChanged,
-                    this, [this, i, sliderEditWidget] (int value) {
+                    this, [=, this] (int value) {
                     const QString I18N_UPDATE_TIME = (value == 1) ?
-                        gTranslationHelper->getTranslationOf("minute", getStringSetting(APP_LANGUAGE)) :
-                        gTranslationHelper->getTranslationOf("minutes", getStringSetting(APP_LANGUAGE));
+                        MINUTE : MINUTES;
                     const QString TOOLTIP_TEXT = QString::number(value) +
                         " " + I18N_UPDATE_TIME;
                     QToolTip::showText(QCursor::pos(), TOOLTIP_TEXT,
@@ -276,8 +326,14 @@ ConfigDialog::createConfigDialog() {
                     mSettingChanges[i] = true;
                     mApplyButton->setEnabled(true);
                 });
+                QLabel* I_LABEL = qobject_cast<QLabel*>(mFormLayout->
+                    labelForField(sliderEditWidget));
+                if (I_LABEL) {
+                    I_LABEL->installEventFilter(
+                        new SettingsDescriptionHints(THIS_HINT));
+                }
                 sliderEditWidget->installEventFilter(
-                    new MinutesHints(this, sliderEditWidget));
+                    new MinutesHints(sliderEditWidget));
                 continue;
             }
         }
@@ -386,7 +442,8 @@ ConfigDialog::loadConfigDialog() {
                 itemAt(i, QFormLayout::FieldRole)->widget());
             if (langComboWidget) {
                 const QString LANG = getStringSetting(THIS_KEY);
-                const int LANG_INDEX = ALL_LANGUAGES.indexOf(LANG);
+                const int LANG_INDEX = TranslationHelper::
+                    ALL_LANGUAGES.indexOf(LANG);
                 langComboWidget->setCurrentIndex(LANG_INDEX);
             }
             continue;
@@ -463,7 +520,8 @@ ConfigDialog::loadConfigDialogWithDefaults() {
                 itemAt(i, QFormLayout::FieldRole)->widget());
             if (langComboWidget) {
                 const QString LANG = getSettingsDefaultStringValue(THIS_KEY);
-                const int LANG_INDEX = ALL_LANGUAGES.indexOf(LANG);
+                const int LANG_INDEX = TranslationHelper::
+                    ALL_LANGUAGES.indexOf(LANG);
                 langComboWidget->setCurrentIndex(LANG_INDEX);
             }
             continue;
@@ -528,7 +586,7 @@ ConfigDialog::acceptConfigDialog() {
             checkboxWidget = qobject_cast<QCheckBox*>(mFormLayout->
                 itemAt(i, QFormLayout::FieldRole)->widget());
             if (checkboxWidget) {
-                const bool VALUE = checkboxWidget->checkState();
+                const bool VALUE = checkboxWidget->isChecked();
                 setBoolSetting(THIS_KEY, VALUE);
             }
             continue;
@@ -579,14 +637,12 @@ ConfigDialog::acceptConfigDialog() {
     // Redraw the StopLightView on ConfigDialog updates.
     // Update the view timer with maybe new ConfigDialog value.
     // Update the plugin view with maybe new size.
-    gStopLightView->updateTimerInterval();
-    gStopLightView->setPluginWidth();
-    gStopLightView->update();
+    gStopLightView->redrawAfterConfigChanges();
 
     mSettingChanges.fill(false);
     mApplyButton->setEnabled(false);
 
-    const bool SHOULD_DISPLAY_ICONS = getBoolSetting(ICONS_ON_BUTTONS);
+    const bool SHOULD_DISPLAY_ICONS = getBoolSetting(SHOW_ICONS_ON_BUTTONS);
     if (SHOULD_DISPLAY_ICONS) {
         mResetButton->setIcon(QIcon::fromTheme("edit-undo"));
         mAboutButton->setIcon(QIcon::fromTheme("help-about"));
