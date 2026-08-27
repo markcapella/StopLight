@@ -79,4 +79,3 @@ TEXT_BOLD=$(getColorCode bold)
     echo
     echo -e "${COLOR_GREEN}""Translating one string to all"\
             "languages complete.""${COLOR_NORMAL}"
-    echo

@@ -1,9 +1,6 @@
 
 #pragma once
 
-// App headers.
-#include "TranslationHelper.h"
-
 // App forward decls.
 class ConfigDialog;
 
@@ -30,7 +27,7 @@ class AboutDialog : public QDialog {
          * Constructor.
          */
         explicit AboutDialog(PluginSettings* settings,
-            ConfigDialog* parent = nullptr);
+            QWidget* parent = nullptr);
 
         /**
          * Destructor & cleanup.
@@ -49,5 +46,6 @@ class AboutDialog : public QDialog {
 
     private:
         // Members.
+        ConfigDialog* mConfigDialog = nullptr;
         PluginSettings* mSettings;
 };

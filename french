@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+# Convenience alias for:
+./startPanelWithLocale fr

@@ -1,5 +1,6 @@
+
 # StopLight
-    
+
 <img src="resources/stoplight.png" alt="drawing" width="150"/>
 
 !['StopLight'](https://github.com/markcapella/StopLight/blob/main/screenshot.png)
@@ -70,12 +71,6 @@
 > side green Plus button "➕" to open the "Add Plugins" dialog.
 >
 > Select StopLight from the list and click the "add Widget" button.
-
-## Adding your own language is simple:
-
-### Edit the three small code blocks in TranslationHelperStrings.h.
-
-> Follow the directions in the file and re-build.
 
 ## markjamescapella@proton.me Rocks !
 

@@ -30,14 +30,14 @@ const QStringList CONFIGURATION_TEXT = {
     "Конфигурация"
 };
 
-const QStringList ABOUT_TEXT = {
-    "About", "Über", "Acerca de", "À propos", "Informazioni", "約",
-    "Over", "Sobre", "О"
-};
-
 const QStringList RESET_TEXT = {
     "Reset", "Zurücksetzen", "Restablecer", "Réinitialiser",
     "Reimposta", "リセット", "Resetten", "Redefinir", "Сброс"
+};
+
+const QStringList ABOUT_TEXT = {
+    "About", "Über", "Acerca de", "À propos", "Informazioni", "約",
+    "Over", "Sobre", "О"
 };
 
 const QStringList OK_TEXT = {
@@ -67,6 +67,73 @@ const QStringList MINUTE = {
 const QStringList MINUTES = {
     "minutes", "Minuten", "minutos", "minutes", "minuti", "分",
     "minuten", "minutos", "минуты"
+};
+
+/**
+ * Second block - About Dialog translations.
+ */
+const QStringList ABOUT_DESCRIPTION = {
+    "Provides an indicator & warning dialogs about your system Free Space (🔴, 🟡, 🟢).",
+    "Bietet eine Anzeige und Warnmeldungen über den freien Speicherplatz Ihres Systems (🔴, 🟡, 🟢).",
+    "Proporciona un indicador y diálogos de advertencia sobre el espacio libre de su sistema (🔴, 🟡, 🟢).",
+    "Fournit un indicateur et des boîtes de dialogue d'avertissement concernant l'espace libre de votre système (🔴, 🟡, 🟢).",
+    "Fornisce un indicatore e finestre di avviso riguardo lo spazio libero del tuo sistema (🔴, 🟡, 🟢).",
+    "システムの空き容量についてのインジケーターと警告ダイアログを提供します（🔴、🟡、🟢）。",
+    "Biedt een indicator en waarschuwingsdialogen over de vrije ruimte van uw systeem (🔴, 🟡, 🟢).",
+    "Fornece um indicador e diálogos de aviso sobre o Espaço Livre do seu sistema (🔴, 🟡, 🟢).",
+    "Предоставляет индикатор и предупреждающие диалоговые окна о свободном месте на вашей системе (🔴, 🟡, 🟢)."
+};
+
+const QStringList ABOUT_ARTWORK = {
+    "Icon artwork provided by",
+    "Symbolgrafik bereitgestellt von",
+    "Arte de icono proporcionado por",
+    "Illustration d'icône fournie par",
+    "Illustrazione dell'icona fornita da",
+    "アイコンのアートワーク提供者",
+    "Pictogramkunst geleverd door",
+    "Arte do ícone fornecida por",
+    "Иконка предоставлена"
+};
+
+/**
+ * Second block - YellowDialog translations.
+ */
+const QStringList YELLOW_TITLE = {
+    "Warning", "Warnung", "Advertencia", "Avertissement", "Avviso",
+    "警告", "Waarschuwing", "Aviso", "Предупреждение"
+};
+
+const QStringList YELLOW_WARNING = {
+    "You've reached the threshold for a Yellow Warning! Check your free space and remove what you can.",
+    "Sie haben die Schwelle für eine Gelbe Warnung erreicht! Überprüfen Sie Ihren freien Speicherplatz und entfernen Sie, was Sie können.",
+    "¡Has alcanzado el umbral de una Advertencia Amarilla! Revisa tu espacio libre y elimina lo que puedas.",
+    "Vous avez atteint le seuil d'un avertissement jaune ! Vérifiez votre espace libre et supprimez ce que vous pouvez.",
+    "Hai raggiunto la soglia per un Avviso Giallo! Controlla lo spazio libero e rimuovi ciò che puoi.",
+    "あなたはイエロー警告の閾値に達しました！空き容量を確認し、不要なものを削除してください。",
+    "Je hebt de drempel voor een Gele Waarschuwing bereikt! Controleer je vrije ruimte en verwijder wat je kunt.",
+    "Você atingiu o limite para um Aviso Amarelo! Verifique seu espaço livre e remova o que puder.",
+    "Вы достигли порога Желтого Предупреждения! Проверьте свободное место и удалите то, что можете."
+};
+
+/**
+ * Second block - RedDialog translations.
+ */
+const QStringList RED_TITLE = {
+    "Alert", "Alarm", "Alerta", "Alerte", "Avviso",
+    "警告", "Waarschuwing", "Alerta", "Тревога"
+};
+
+const QStringList RED_ALERT = {
+    "You've reached the threshold for a Red Alert! Check your free space and remove what you can.",
+    "Sie haben die Schwelle für eine Rote Alarmstufe erreicht! Überprüfen Sie Ihren freien Speicherplatz und entfernen Sie, was Sie können.",
+    "¡Has alcanzado el umbral de una Alerta Roja! Revisa tu espacio libre y elimina lo que puedas.",
+    "Vous avez atteint le seuil d'une alerte rouge ! Vérifiez votre espace libre et supprimez ce que vous pouvez.",
+    "Hai raggiunto la soglia per un Allarme Rosso! Controlla lo spazio libero e rimuovi ciò che puoi.",
+    "レッドアラートの閾値に達しました！空き容量を確認し、不要なものを削除してください。",
+    "Je hebt de drempel voor een Rode Alarm bereikt! Controleer je vrije ruimte en verwijder wat je kunt.",
+    "Você atingiu o limite para um Alerta Vermelho! Verifique seu espaço livre e remova o que puder.",
+    "Вы достигли порога Красного Тревожного сигнала! Проверьте свободное место и удалите то, что можно."
 };
 
 /**
@@ -543,73 +610,6 @@ const QStringList SHOW_ICONS_ON_BUTTONS_DESC = {
     "Schakelt de weergave van visuele pictogrammen op knoppen in of uit.",
     "Ativa ou desativa a exibição de ícones visuais nos botões.",
     "Включает или отключает отображение визуальных значков на кнопках."
-};
-
-/**
- * Second block - About Dialog translations.
- */
-const QStringList ABOUT_DESCRIPTION = {
-    "Provides an indicator & warning dialogs about your system Free Space (🔴, 🟡, 🟢).",
-    "Bietet eine Anzeige und Warnmeldungen über den freien Speicherplatz Ihres Systems (🔴, 🟡, 🟢).",
-    "Proporciona un indicador y diálogos de advertencia sobre el espacio libre de su sistema (🔴, 🟡, 🟢).",
-    "Fournit un indicateur et des boîtes de dialogue d'avertissement concernant l'espace libre de votre système (🔴, 🟡, 🟢).",
-    "Fornisce un indicatore e finestre di avviso riguardo lo spazio libero del tuo sistema (🔴, 🟡, 🟢).",
-    "システムの空き容量についてのインジケーターと警告ダイアログを提供します（🔴、🟡、🟢）。",
-    "Biedt een indicator en waarschuwingsdialogen over de vrije ruimte van uw systeem (🔴, 🟡, 🟢).",
-    "Fornece um indicador e diálogos de aviso sobre o Espaço Livre do seu sistema (🔴, 🟡, 🟢).",
-    "Предоставляет индикатор и предупреждающие диалоговые окна о свободном месте на вашей системе (🔴, 🟡, 🟢)."
-};
-
-const QStringList ABOUT_ARTWORK = {
-    "Icon artwork provided by",
-    "Symbolgrafik bereitgestellt von",
-    "Arte de icono proporcionado por",
-    "Illustration d'icône fournie par",
-    "Illustrazione dell'icona fornita da",
-    "アイコンのアートワーク提供者",
-    "Pictogramkunst geleverd door",
-    "Arte do ícone fornecida por",
-    "Иконка предоставлена"
-};
-
-/**
- * Second block - YellowDialog translations.
- */
-const QStringList YELLOW_TITLE = {
-    "Warning", "Warnung", "Advertencia", "Avertissement", "Avviso",
-    "警告", "Waarschuwing", "Aviso", "Предупреждение"
-};
-
-const QStringList YELLOW_WARNING = {
-    "You've reached the threshold for a Yellow Warning! Check your free space and remove what you can.",
-    "Sie haben die Schwelle für eine Gelbe Warnung erreicht! Überprüfen Sie Ihren freien Speicherplatz und entfernen Sie, was Sie können.",
-    "¡Has alcanzado el umbral de una Advertencia Amarilla! Revisa tu espacio libre y elimina lo que puedas.",
-    "Vous avez atteint le seuil d'un avertissement jaune ! Vérifiez votre espace libre et supprimez ce que vous pouvez.",
-    "Hai raggiunto la soglia per un Avviso Giallo! Controlla lo spazio libero e rimuovi ciò che puoi.",
-    "あなたはイエロー警告の閾値に達しました！空き容量を確認し、不要なものを削除してください。",
-    "Je hebt de drempel voor een Gele Waarschuwing bereikt! Controleer je vrije ruimte en verwijder wat je kunt.",
-    "Você atingiu o limite para um Aviso Amarelo! Verifique seu espaço livre e remova o que puder.",
-    "Вы достигли порога Желтого Предупреждения! Проверьте свободное место и удалите то, что можете."
-};
-
-/**
- * Second block - RedDialog translations.
- */
-const QStringList RED_TITLE = {
-    "Alert", "Alarm", "Alerta", "Alerte", "Avviso",
-    "警告", "Waarschuwing", "Alerta", "Тревога"
-};
-
-const QStringList RED_ALERT = {
-    "You've reached the threshold for a Red Alert! Check your free space and remove what you can.",
-    "Sie haben die Schwelle für eine Rote Alarmstufe erreicht! Überprüfen Sie Ihren freien Speicherplatz und entfernen Sie, was Sie können.",
-    "¡Has alcanzado el umbral de una Alerta Roja! Revisa tu espacio libre y elimina lo que puedas.",
-    "Vous avez atteint le seuil d'une alerte rouge ! Vérifiez votre espace libre et supprimez ce que vous pouvez.",
-    "Hai raggiunto la soglia per un Allarme Rosso! Controlla lo spazio libero e rimuovi ciò che puoi.",
-    "レッドアラートの閾値に達しました！空き容量を確認し、不要なものを削除してください。",
-    "Je hebt de drempel voor een Rode Alarm bereikt! Controleer je vrije ruimte en verwijder wat je kunt.",
-    "Você atingiu o limite para um Alerta Vermelho! Verifique seu espaço livre e remova o que puder.",
-    "Вы достигли порога Красного Тревожного сигнала! Проверьте свободное место и удалите то, что можно."
 };
 
 /**

@@ -1,0 +1,15 @@
+[Desktop Entry]
+Type=Service
+ServiceTypes=LXQtPanel/Plugin
+
+Name=@APP_NAME@
+Comment=Provides an indicator & warning dialogs about your system Free Space (🔴, 🟡, 🟢).
+Comment[de]=Bietet eine Anzeige und Warnmeldungen über den freien Speicherplatz Ihres Systems (🔴, 🟡, 🟢).
+Comment[es]=Proporciona un indicador y diálogos de advertencia sobre el espacio libre de su sistema (🔴, 🟡, 🟢).
+Comment[fr]=Fournit un indicateur et des boîtes de dialogue d'avertissement concernant l'espace libre de votre système (🔴, 🟡, 🟢).
+Comment[it]=Fornisce un indicatore e finestre di avviso riguardo lo spazio libero del tuo sistema (🔴, 🟡, 🟢).
+Comment[ja]=システムの空き容量についてのインジケーターと警告ダイアログを提供します（🔴、🟡、🟢）。
+Comment[nl]=Biedt een indicator en waarschuwingsdialogen over de vrije ruimte van uw systeem (🔴, 🟡, 🟢).
+Comment[pt]=Fornece um indicador e diálogos de aviso sobre o Espaço Livre do seu sistema (🔴, 🟡, 🟢).
+Comment[ru]=Предоставляет индикатор и предупреждающие диалоговые окна о свободном месте на вашей системе (🔴, 🟡, 🟢).
+Icon=@APP_ICON@

@@ -1,11 +1,8 @@
 
 #pragma once
 
-// App headers.
-#include "Globals.h"
-#include "TranslationHelper.h"
-
 // Qt Headers.
+#include <QCoreApplication>
 #include <QEvent>
 #include <QToolTip>
 
@@ -39,12 +36,8 @@ struct MinutesHints : public QObject {
                 if (!s->isSliderDown()) {
                     const int VALUE = s->value();
                     const QString I18N_UPDATE_TIME = (VALUE == 1) ?
-                        gTranslationHelper->getTranslationOf("minute",
-                            gConfigDialog->getStringSetting(
-                                ConfigDialog::APP_LANGUAGE)) :
-                        gTranslationHelper->getTranslationOf("minutes",
-                            gConfigDialog->getStringSetting(
-                                ConfigDialog::APP_LANGUAGE));
+                        QCoreApplication::translate("ConfigDialog", "minute") :
+                        QCoreApplication::translate("ConfigDialog", "minutes");
                     const QString TOOLTIP_TEXT = QString::number(VALUE) +
                         " " + I18N_UPDATE_TIME;
                     QToolTip::showText(QCursor::pos(), TOOLTIP_TEXT, s);
@@ -58,12 +51,8 @@ struct MinutesHints : public QObject {
                 if (!s->isSliderDown()) {
                     const int VALUE = s->value();
                     const QString I18N_UPDATE_TIME = (VALUE == 1) ?
-                        gTranslationHelper->getTranslationOf("minute",
-                            gConfigDialog->getStringSetting(
-                                ConfigDialog::APP_LANGUAGE)) :
-                        gTranslationHelper->getTranslationOf("minutes",
-                            gConfigDialog->getStringSetting(
-                                ConfigDialog::APP_LANGUAGE));
+                        QCoreApplication::translate("ConfigDialog", "minute") :
+                        QCoreApplication::translate("ConfigDialog", "minutes");
                     const QString TOOLTIP_TEXT = QString::number(VALUE) +
                         " " + I18N_UPDATE_TIME;
                     QToolTip::showText(QCursor::pos(), TOOLTIP_TEXT, s);

@@ -1,0 +1,51 @@
+
+#!/usr/bin/env bash
+
+# Color styling.
+getColorCode() {
+    tput "$@" 2>/dev/null || true
+}
+
+COLOR_NORMAL=$(getColorCode sgr0)
+COLOR_BLACK=$(getColorCode setaf 0)
+COLOR_RED=$(getColorCode setaf 1)
+COLOR_GREEN=$(getColorCode setaf 2)
+COLOR_YELLOW=$(getColorCode setaf 3)
+COLOR_BLUE=$(getColorCode setaf 4)
+COLOR_MAGENTA=$(getColorCode setaf 5)
+COLOR_CYAN=$(getColorCode setaf 6)
+COLOR_WHITE=$(getColorCode setaf 7)
+
+TEXT_BOLD=$(getColorCode bold)
+
+##
+# startPanelWithLocale
+#
+    echo
+    echo  -e "${COLOR_GREEN}""Starting panel with locale."\
+        "${COLOR_NORMAL}"
+
+    # Ensure there's a locale to use.
+    if [[ "$1" == "" ]]; then
+        echo
+        echo -e "${COLOR_YELLOW}"\
+            "   try: |"$0" fr # Start in French.|""${COLOR_NORMAL}"
+        echo
+        echo -e "${COLOR_GREEN}""Translating one string to all"\
+            "languages complete.""${COLOR_NORMAL}"
+        exit 1
+    fi
+
+    LANG="$1"
+    LANG_LOWER=${LANG,,}
+    LANG_UPPER=${LANG^^}
+
+    # Exit via ctrl-c is normal.
+    killall lxqt-panel 2>/dev/null
+
+    trap 'exit 0' INT
+    LANG="$LANG_LOWER"_FR.UTF-8 LANGUAGE="$LANG_LOWER" lxqt-panel
+
+    echo
+    echo -e "${COLOR_GREEN}"Starting panel with locale complete."\
+        "${COLOR_NORMAL}"

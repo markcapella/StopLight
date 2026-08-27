@@ -1,9 +1,9 @@
 
-// Class header.
-#include "StopLightPluginLibrary.h"
-
-// App headers.
+// App Headers.
 #include "StopLight.h"
+
+// LXQt Headers.
+#include "StopLightPluginLibrary.h"
 
 /**
  * Unique instance of plugin allowing several running

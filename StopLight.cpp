@@ -1,18 +1,18 @@
 
-// App headers.
-#include "Globals.h"
-#include "StopLight.h"
-
+// App Headers.
 #include "ConfigDialog.h"
+#include "StopLight.h"
 #include "StopLightView.h"
-#include "TranslationHelper.h"
 
 // C Headers.
 #include <iostream>
-using namespace std;
 
-// Qt6 headers.
+// Qt6 Headers.
 #include <QDialog>
+
+// LXQt Headers.
+#include <lxqt/pluginsettings.h>
+
 
 /**
  * StopLight 🚦 is an LXQT Panel plugin Widget that monitors your
@@ -24,15 +24,12 @@ using namespace std;
 StopLight::StopLight(const ILXQtPanelPluginStartupInfo& startupInfo) :
     QObject(), ILXQtPanelPlugin(startupInfo) {
 
-    // Global translation helper.
-    gTranslationHelper = new TranslationHelper();
-
     // Global Config Dialog & settings helper.
     PluginSettings* SETTINGS = settings();
-    gConfigDialog = new ConfigDialog(this, SETTINGS);
+    mConfigDialog = new ConfigDialog(this, SETTINGS);
 
     // Global widget view.
-    gStopLightView = new StopLightView(this, SETTINGS);
+    mStopLightView = new StopLightView(this, mConfigDialog, SETTINGS);
 }
 
 /**
@@ -45,7 +42,7 @@ StopLight::~StopLight() = default;
  */
 QWidget*
 StopLight::widget() {
-    return gStopLightView;
+    return mStopLightView;
 }
 
 /**
@@ -57,7 +54,7 @@ StopLight::widget() {
  */
 bool
 StopLight::isSeparate() const {
-    const bool INDICATOR_SHRINKS_TO_ROW = gConfigDialog->
+    const bool INDICATOR_SHRINKS_TO_ROW = mConfigDialog->
         getBoolSetting(ConfigDialog::INDICATOR_SHRINKS_TO_ROW);
 
     return INDICATOR_SHRINKS_TO_ROW ? false : true;
@@ -68,5 +65,5 @@ StopLight::isSeparate() const {
  */
 QDialog*
 StopLight::configureDialog() {
-    return gConfigDialog;
+    return mConfigDialog;
 }

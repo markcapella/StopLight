@@ -5,14 +5,14 @@
 class ConfigDialog;
 class StopLightView;
 
-// Qt6 headers.
+// Qt6 Headers.
 #include <QObject>
 
 // Qt6 forward decls.
 class QDialog;
 class QWidget;
 
-// Lxqt headers.
+// LXQt Headers.
 #include <lxqt/ilxqtpanelplugin.h>
 
 /**
@@ -42,7 +42,7 @@ class StopLight : public QObject, public ILXQtPanelPlugin {
         QString themeId() const override {
             return QStringLiteral("StopLight");
         }
-        
+
         /**
          * Publish our StopLightView.
          */
@@ -71,5 +71,7 @@ class StopLight : public QObject, public ILXQtPanelPlugin {
 
     private:
         // Members.
+        ConfigDialog* mConfigDialog;
+        StopLightView* mStopLightView;
 
 };

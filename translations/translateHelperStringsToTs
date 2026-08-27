@@ -1,0 +1,188 @@
+#!/usr/bin/env python3
+
+import re
+import sys
+import xml.etree.ElementTree as ET
+from pathlib import Path
+
+
+def parse_cpp_strings(filename):
+    text = Path(filename).read_text(encoding="utf-8")
+
+    # Get ALL_LANGUAGES.
+    match = re.search(
+        r'ALL_LANGUAGES\s*=\s*\{(.*?)\};',
+        text,
+        re.DOTALL
+    )
+
+    if not match:
+        raise RuntimeError("ALL_LANGUAGES not found")
+
+    languages = re.findall(
+        r'"((?:\\.|[^"\\])*)"',
+        match.group(1)
+    )
+
+    translations = {}
+
+    # Find every:
+    #
+    # const QStringList NAME = {
+    #     "...", "...", ...
+    # };
+    #
+    pattern = re.compile(
+        r'const\s+QStringList\s+([A-Za-z_][A-Za-z0-9_]*)\s*'
+        r'=\s*\{(.*?)\};',
+        re.DOTALL
+    )
+
+    for match in pattern.finditer(text):
+        name = match.group(1)
+        body = match.group(2)
+
+        strings = re.findall(
+            r'"((?:\\.|[^"\\])*)"',
+            body
+        )
+
+        if len(strings) != len(languages):
+            raise RuntimeError(
+                f"{name}: found {len(strings)} strings, "
+                f"expected {len(languages)}"
+            )
+
+        translations[name] = dict(zip(languages, strings))
+
+    return languages, translations
+
+
+def xml_text(element):
+    if element is None:
+        return ""
+
+    return "".join(element.itertext())
+
+
+def process_ts_file(ts_file, translations):
+    tree = ET.parse(ts_file)
+    root = tree.getroot()
+
+    language = root.attrib.get("language")
+
+    if not language:
+        print(f"WARNING: {ts_file}: no language attribute")
+        return 0
+
+    if language not in translations["languages"]:
+        print(f"WARNING: {ts_file}: unsupported language '{language}'")
+        return 0
+
+    language_index = translations["languages"].index(language)
+
+    # Build:
+    #
+    # English source -> translated string
+    #
+    source_map = {}
+
+    for name, values in translations["sets"].items():
+        source = values[translations["languages"][0]]
+
+        translation = values[language]
+
+        source_map[source] = translation
+
+    changed = 0
+
+    for message in root.findall(".//message"):
+        source_element = message.find("source")
+        translation_element = message.find("translation")
+        if source_element is None or translation_element is None:
+            continue
+
+        source = xml_text(source_element)
+        if source not in source_map:
+            continue
+
+        translated = source_map[source]
+
+        # Don't touch translations that already contain text.
+        current = xml_text(translation_element)
+
+        if current:
+            continue
+
+        translation_element.attrib.pop("type", None)
+        translation_element.text = translated
+
+        changed += 1
+
+    if changed:
+        tree.write(
+            ts_file,
+            encoding="utf-8",
+            xml_declaration=True
+        )
+
+    return changed
+
+
+def main():
+    if len(sys.argv) != 3:
+        print(
+            f"Usage: {sys.argv[0]} "
+            "<TranslationHelperStrings.h> <ts-directory>"
+        )
+        sys.exit(1)
+
+    cpp_file = Path(sys.argv[1])
+    ts_directory = Path(sys.argv[2])
+
+    if not cpp_file.is_file():
+        print(f"ERROR: file not found: {cpp_file}")
+        sys.exit(1)
+
+    if not ts_directory.is_dir():
+        print(f"ERROR: directory not found: {ts_directory}")
+        sys.exit(1)
+
+    languages, translation_sets = parse_cpp_strings(cpp_file)
+
+    translations = {
+        "languages": languages,
+        "sets": translation_sets
+    }
+
+    print(f"Languages: {', '.join(languages)}")
+    print(f"Translation sets: {len(translation_sets)}")
+    print()
+
+    total = 0
+
+    for language in languages:
+        if language == "en":
+            continue
+
+        ts_file = ts_directory / f"stoplight_{language}.ts"
+
+        if not ts_file.exists():
+            print(f"SKIP {ts_file}: not found")
+            continue
+
+        changed = process_ts_file(ts_file, translations)
+
+        print(
+            f"{ts_file}: "
+            f"{changed} translation(s) populated"
+        )
+
+        total += changed
+
+    print()
+    print(f"Total translations populated: {total}")
+
+
+if __name__ == "__main__":
+    main()

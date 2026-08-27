@@ -1,13 +1,10 @@
 
-// App headers.
-#include "Globals.h"
+// App Headers.
 #include "AboutDialog.h"
-
 #include "ConfigDialog.h"
 
 // C Headers.
 #include <iostream>
-using namespace std;
 
 // Qt Headers.
 #include <QCloseEvent>
@@ -23,18 +20,16 @@ using namespace std;
 /**
  * Simple class to represent an AboutDialog.
  */
-AboutDialog::AboutDialog(PluginSettings* settings,
-    ConfigDialog* parent) : QDialog(parent) {
-    setMinimumWidth(600);
+AboutDialog::AboutDialog(PluginSettings* settings, QWidget* parent) :
+    QDialog(parent) {
 
     // Save App ref.
     mSettings = settings;
+    mConfigDialog = qobject_cast<ConfigDialog*>(parent);
 
     // Set title & icon.
     setWindowFlags(Qt::Dialog | Qt::Tool);
-    setWindowTitle(gTranslationHelper->getTranslationOf("About",
-        gConfigDialog->getStringSetting(ConfigDialog::
-        APP_LANGUAGE)) + QString(" ") + mSettings->group());
+    setWindowTitle(tr("About") + QString(" ") + mSettings->group());
     setWindowIcon(QIcon::fromTheme(APP_ICON));
 
     // Create overall container.
@@ -69,9 +64,9 @@ AboutDialog::AboutDialog(PluginSettings* settings,
     mainLayout->addSpacing(10);
 
     // App description line.
-    QLabel* appDescLine = new QLabel(gTranslationHelper->
-        getTranslationOf(APP_DESC, gConfigDialog->
-        getStringSetting(ConfigDialog::APP_LANGUAGE)), this);
+    const QString DESC = tr("Provides an indicator & warning dialogs "
+        "about your system Free Space (🔴, 🟡, 🟢).");
+    QLabel* appDescLine = new QLabel(DESC, this);
     appDescLine->setAlignment(Qt::AlignCenter);
     appDescLine->setWordWrap(true);
     QFont appDescFont = appDescLine->font();
@@ -94,9 +89,7 @@ AboutDialog::AboutDialog(PluginSettings* settings,
 
     // Credits line.
     QLabel* iconCreditsLine = new QLabel(this);
-    iconCreditsLine->setText(gTranslationHelper->getTranslationOf(
-        "Icon artwork provided by", gConfigDialog->
-        getStringSetting(ConfigDialog::APP_LANGUAGE)) +
+    iconCreditsLine->setText(QString(tr("Icon artwork provided by")) +
         " <a href=\"https://www.123rf.com/stock-photo/" +
         "stoplight_cartoon_outline.html\">" + QString("123RF") + "</a>");
     iconCreditsLine->setOpenExternalLinks(true);
@@ -116,25 +109,21 @@ AboutDialog::AboutDialog(PluginSettings* settings,
     mainLayout->addSpacing(20);
 
     // Create Ok / Cancel ButtonBoxBox with a Repo button.
-    const bool SHOULD_DISPLAY_ICONS = gConfigDialog->
+    const bool SHOULD_DISPLAY_ICONS = mConfigDialog->
         getBoolSetting(ConfigDialog::SHOW_ICONS_ON_BUTTONS);
 
     QDialogButtonBox* buttonBox = new QDialogButtonBox(
         QDialogButtonBox::Ok, this);
 
     QPushButton* okButton = buttonBox->button(QDialogButtonBox::Ok);
-    okButton->setText(gTranslationHelper->getTranslationOf("Ok",
-        gConfigDialog->getStringSetting(ConfigDialog::
-            APP_LANGUAGE)));
+    okButton->setText(tr("Ok"));
     if (SHOULD_DISPLAY_ICONS) {
         okButton->setIcon(QIcon::fromTheme("dialog-ok"));
     } else {
         okButton->setIcon(QIcon());
     }
 
-    QPushButton* repoButton = new QPushButton(gTranslationHelper->
-        getTranslationOf("Repo", gConfigDialog->
-            getStringSetting(ConfigDialog::APP_LANGUAGE)));
+    QPushButton* repoButton = new QPushButton(tr("Repo"));
     if (SHOULD_DISPLAY_ICONS) {
         repoButton->setIcon(QIcon::fromTheme("internet-web-browser"));
     } else {
@@ -157,7 +146,6 @@ AboutDialog::AboutDialog(PluginSettings* settings,
  * Destructor.
  */
 AboutDialog::~AboutDialog() {
-    delete gTranslationHelper;
 }
 
 /**

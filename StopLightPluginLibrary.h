@@ -1,10 +1,10 @@
 
 #pragma once
 
-// Qt6 headers.
+// Qt6 Headers.
 #include <QObject>
 
-// Lxqt headers.
+// LXQt Headers.
 #include <lxqt/ilxqtpanelplugin.h>
 
 /**

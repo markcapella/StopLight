@@ -18,7 +18,7 @@ COLOR_WHITE=$(getColorCode setaf 7)
 TEXT_BOLD=$(getColorCode bold)
 
 ##
-# buildPlugin
+# restartPanel
 #
     echo
     echo  -e "${COLOR_GREEN}""Restarting LxQt Panel.""${COLOR_NORMAL}"
@@ -28,5 +28,6 @@ TEXT_BOLD=$(getColorCode bold)
     RESULT=$?
 
     echo
-    echo -e "${COLOR_GREEN}""Restart LxQt Panel complete.""${COLOR_NORMAL}"
+    echo -e "${COLOR_GREEN}""Restart LxQt Panel complete."\
+        "${COLOR_NORMAL}"
     exit "$RESULT"

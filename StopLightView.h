@@ -7,7 +7,7 @@ class StopLight;
 class RedDialog;
 class YellowDialog;
 
-// Qt6 headers.
+// Qt6 Headers.
 #include <QLabel>
 
 // Qt6 forward decls.
@@ -20,7 +20,7 @@ class PluginSettings;
 
 /**
  * The main panel plugin view is a basic colored indicator
- * (🔴, 🟡. 🟢) with optional freeSpace%. 
+ * (🔴, 🟡. 🟢) with optional freeSpace%.
  */
 class StopLightView : public QLabel {
     Q_OBJECT
@@ -30,7 +30,8 @@ class StopLightView : public QLabel {
          * Constructor.
          */
         explicit StopLightView(StopLight* stopLight,
-            PluginSettings* settings, QWidget* parent = nullptr);
+            ConfigDialog* configDialog, PluginSettings* settings,
+            QWidget* parent = nullptr);
 
         /**
          * Destructor & cleanup.
@@ -138,6 +139,7 @@ class StopLightView : public QLabel {
          * Members.
          */
         StopLight* mStopLight = nullptr;
+        ConfigDialog* mConfigDialog = nullptr;
         PluginSettings* mSettings;
 
         QTimer* mCheckSpaceTimer = nullptr;

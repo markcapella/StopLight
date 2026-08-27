@@ -1,14 +1,10 @@
 
-// App headers.
-#include "Globals.h"
-#include "RedDialog.h"
-
+// App Headers.
 #include "ConfigDialog.h"
-#include "TranslationHelper.h"
+#include "RedDialog.h"
 
 // C Headers.
 #include <iostream>
-using namespace std;
 
 // Qt Headers.
 #include <QDesktopServices>
@@ -17,17 +13,18 @@ using namespace std;
 #include <QPushButton>
 #include <QVBoxLayout>
 
-// LXQT Headers.
+// LXQt Headers.
 #include <lxqt/pluginsettings.h>
 
 /**
  * Simple class to represent an RedDialog.
  */
-RedDialog::RedDialog(PluginSettings* settings,
-    QWidget* parent) : QDialog(parent) {
+RedDialog::RedDialog(ConfigDialog* configDialog,
+    PluginSettings* settings, QWidget* parent) : QDialog(parent) {
 
     // Save App ref.
     mSettings = settings;
+    mConfigDialog = configDialog;
 
     // Set window flags & resize.
     setWindowFlags(Qt::Dialog | Qt::Tool);
@@ -35,10 +32,7 @@ RedDialog::RedDialog(PluginSettings* settings,
     setFixedSize(size());
 
     // Set title & icon.
-    const QString LANGUAGE_FOR_I18N = gConfigDialog->
-        getStringSetting(ConfigDialog::APP_LANGUAGE);
-    const QString RED_TITLE_I18N = gTranslationHelper->
-        getTranslationOf(RED_TITLE, LANGUAGE_FOR_I18N);
+    const QString RED_TITLE_I18N = QString(tr("Alert"));
     setWindowTitle(mSettings->group() + " " + RED_TITLE_I18N);
     setWindowIcon(QIcon::fromTheme(APP_ICON));
 
@@ -47,8 +41,9 @@ RedDialog::RedDialog(PluginSettings* settings,
     mainLayout->setSpacing(0);
     mainLayout->addSpacing(25);
 
-    const QString RED_ALERT_I18N = "🔴 " + gTranslationHelper->
-        getTranslationOf(RED_ALERT, LANGUAGE_FOR_I18N);
+    const QString RED_ALERT_I18N = "🔴 " + QString(tr("You've reached "
+        "the threshold for a Red Alert! Check your free space and "
+        "remove what you can."));
     QLabel* appTitleLine = new QLabel(RED_ALERT_I18N);
 
     appTitleLine->setAlignment(Qt::AlignCenter);
@@ -64,15 +59,13 @@ RedDialog::RedDialog(PluginSettings* settings,
     mainLayout->addSpacing(25);
 
     // Create Ok ButtonBoxBox.
-    const bool SHOULD_DISPLAY_ICONS = gConfigDialog->
+    const bool SHOULD_DISPLAY_ICONS = mConfigDialog->
         getBoolSetting(ConfigDialog::SHOW_ICONS_ON_BUTTONS);
 
     QDialogButtonBox* buttonBox = new QDialogButtonBox(
         QDialogButtonBox::Ok, this);
     QPushButton* okButton = buttonBox->button(QDialogButtonBox::Ok);
-    okButton->setText(gTranslationHelper->getTranslationOf("Ok",
-        gConfigDialog->getStringSetting(ConfigDialog::
-            APP_LANGUAGE)));
+    okButton->setText(tr("Ok"));
     if (SHOULD_DISPLAY_ICONS) {
         okButton->setIcon(QIcon::fromTheme("dialog-ok"));
     } else {
@@ -90,7 +83,6 @@ RedDialog::RedDialog(PluginSettings* settings,
  * Destructor.
  */
 RedDialog::~RedDialog() {
-    delete gTranslationHelper;
 }
 
 /**

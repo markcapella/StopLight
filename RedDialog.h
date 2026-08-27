@@ -1,16 +1,15 @@
 
 #pragma once
 
-// App headers.
-#include "TranslationHelper.h"
+// App forward decls.
+class ConfigDialog;
 
 // Qt Headers.
-#include <QDialog>
 #include <QCloseEvent>
+#include <QDialog>
 
 // Qt6 forward decls.
 class QWidget;
-class ConfigDialog;
 
 // LXQT forward decls.
 class PluginSettings;
@@ -27,14 +26,11 @@ class RedDialog : public QDialog {
 
         static inline const int FONT_BASE_SIZE = 16;
 
-        static inline const QString RED_TITLE = "Alert";
-        static inline const QString RED_ALERT = "You've reached the threshold for a Red Alert! Check your free space and remove what you can.";
-
         /**
          * Constructor.
          */
-        explicit RedDialog(PluginSettings* settings,
-            QWidget* parent = nullptr);
+        explicit RedDialog(ConfigDialog* configDialog,
+            PluginSettings* settings, QWidget* parent = nullptr);
 
         /**
          * Destructor & cleanup.
@@ -53,6 +49,7 @@ class RedDialog : public QDialog {
 
     private:
         // Members.
+        ConfigDialog* mConfigDialog = nullptr;
         PluginSettings* mSettings;
 
 };

@@ -1,0 +1,127 @@
+#!/usr/bin/env python3
+
+import sys
+import xml.etree.ElementTree as ET
+from pathlib import Path
+
+
+def xml_text(element):
+    if element is None:
+        return ""
+
+    return "".join(element.itertext())
+
+
+def read_ts_translation(ts_file, english):
+    tree = ET.parse(ts_file)
+    root = tree.getroot()
+
+    for message in root.findall(".//message"):
+        source = message.find("source")
+        translation = message.find("translation")
+
+        if source is None or translation is None:
+            continue
+
+        if xml_text(source) != english:
+            continue
+
+        return xml_text(translation)
+
+    return None
+
+
+def main():
+    if len(sys.argv) != 4:
+        print(
+            f"Usage: {sys.argv[0]} "
+            "<desktop.in> <output.desktop> <ts-directory>"
+        )
+        sys.exit(1)
+
+    desktop_in = Path(sys.argv[1])
+    desktop_out = Path(sys.argv[2])
+    ts_directory = Path(sys.argv[3])
+
+    if not desktop_in.is_file():
+        print(f"ERROR: file not found: {desktop_in}")
+        sys.exit(1)
+
+    if not ts_directory.is_dir():
+        print(f"ERROR: directory not found: {ts_directory}")
+        sys.exit(1)
+
+    lines = desktop_in.read_text(
+        encoding="utf-8"
+    ).splitlines()
+
+    english_comment = None
+
+    for line in lines:
+        if line.startswith("Comment="):
+            english_comment = line[len("Comment="):]
+            break
+
+    if english_comment is None:
+        print("ERROR: no Comment= entry found")
+        sys.exit(1)
+
+    translations = {}
+
+    for ts_file in sorted(ts_directory.glob("*.ts")):
+        language = ts_file.stem.rsplit("_", 1)[-1]
+
+        if language == "en":
+            continue
+
+        translation = read_ts_translation(
+            ts_file,
+            english_comment
+        )
+
+        if translation:
+            translations[language] = translation
+
+    if not translations:
+        print(
+            "ERROR: no translations found for:\n"
+            f"  {english_comment}"
+        )
+        sys.exit(1)
+
+    # Remove any existing localized Comment entries.
+    lines = [
+        line for line in lines
+        if not line.startswith("Comment[")
+    ]
+
+    # Insert localized comments immediately after Comment=.
+    output = []
+
+    for line in lines:
+        output.append(line)
+
+        if line.startswith("Comment="):
+            for language, translation in translations.items():
+                output.append(
+                    f"Comment[{language}]={translation}"
+                )
+
+    desktop_out.parent.mkdir(
+        parents=True,
+        exist_ok=True
+    )
+
+    desktop_out.write_text(
+        "\n".join(output) + "\n",
+        encoding="utf-8"
+    )
+
+    print(
+        f"{desktop_out}: "
+        f"{len(translations)} localized Comment(s) written"
+    )
+
+
+if __name__ == "__main__":
+    main()

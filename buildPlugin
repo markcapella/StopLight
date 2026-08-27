@@ -35,6 +35,8 @@ TEXT_BOLD=$(getColorCode bold)
         echo
     fi
 
+    cmake --build "$PROJ" --target update_translations
+    RESULT=$?
     cmake --build "$PROJ"
     RESULT=$?
 

@@ -1,14 +1,10 @@
 
-// App headers.
-#include "Globals.h"
-#include "YellowDialog.h"
-
+// App Headers.
 #include "ConfigDialog.h"
-#include "TranslationHelper.h"
+#include "YellowDialog.h"
 
 // C Headers.
 #include <iostream>
-using namespace std;
 
 // Qt Headers.
 #include <QDesktopServices>
@@ -17,18 +13,19 @@ using namespace std;
 #include <QPushButton>
 #include <QVBoxLayout>
 
-// LXQT Headers.
+// LXQt Headers.
 #include <lxqt/pluginsettings.h>
 
 /**
  * Simple class to represent an YellowDialog.
  *
  */
-YellowDialog::YellowDialog(PluginSettings* settings,
-    QWidget* parent) : QDialog(parent) {
+YellowDialog::YellowDialog(ConfigDialog* configDialog,
+    PluginSettings* settings, QWidget* parent) : QDialog(parent) {
 
     // Save App ref.
     mSettings = settings;
+    mConfigDialog = configDialog;
 
     // Set window flags & resize.
     setWindowFlags(Qt::Dialog | Qt::Tool);
@@ -36,10 +33,7 @@ YellowDialog::YellowDialog(PluginSettings* settings,
     setFixedSize(size());
 
     // Set title & icon.
-    const QString LANGUAGE_FOR_I18N = gConfigDialog->
-        getStringSetting(ConfigDialog::APP_LANGUAGE);
-    const QString YELLOW_TITLE_I18N = gTranslationHelper->
-        getTranslationOf(YELLOW_TITLE, LANGUAGE_FOR_I18N);
+    const QString YELLOW_TITLE_I18N = QString(tr("Warning"));
     setWindowTitle(mSettings->group() + " " + YELLOW_TITLE_I18N);
     setWindowIcon(QIcon::fromTheme(APP_ICON));
 
@@ -48,8 +42,9 @@ YellowDialog::YellowDialog(PluginSettings* settings,
     mainLayout->setSpacing(0);
     mainLayout->addSpacing(20);
 
-    const QString YELLOW_WARNING_I18N = "🟡 " + gTranslationHelper->
-        getTranslationOf(YELLOW_WARNING, LANGUAGE_FOR_I18N);
+    const QString YELLOW_WARNING_I18N = "🟡 " + QString(tr("You've "
+        "reached the threshold for a Yellow Warning! Check your "
+        "free space and remove what you can."));
     QLabel* appTitleLine = new QLabel(YELLOW_WARNING_I18N);
 
     appTitleLine->setAlignment(Qt::AlignCenter);
@@ -65,15 +60,13 @@ YellowDialog::YellowDialog(PluginSettings* settings,
     mainLayout->addSpacing(20);
 
     // Create Ok ButtonBoxBox.
-    const bool SHOULD_DISPLAY_ICONS = gConfigDialog->
+    const bool SHOULD_DISPLAY_ICONS = mConfigDialog->
         getBoolSetting(ConfigDialog::SHOW_ICONS_ON_BUTTONS);
 
     QDialogButtonBox* buttonBox = new QDialogButtonBox(
         QDialogButtonBox::Ok, this);
     QPushButton* okButton = buttonBox->button(QDialogButtonBox::Ok);
-    okButton->setText(gTranslationHelper->getTranslationOf("Ok",
-        gConfigDialog->getStringSetting(ConfigDialog::
-            APP_LANGUAGE)));
+    okButton->setText(tr("Ok"));
     if (SHOULD_DISPLAY_ICONS) {
         okButton->setIcon(QIcon::fromTheme("dialog-ok"));
     } else {
@@ -91,7 +84,6 @@ YellowDialog::YellowDialog(PluginSettings* settings,
  * Destructor.
  */
 YellowDialog::~YellowDialog() {
-    delete gTranslationHelper;
 }
 
 /**

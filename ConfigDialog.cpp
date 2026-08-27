@@ -1,21 +1,18 @@
 
-// Class header.
-#include "ConfigDialog.h"
-
-// App headers.
+// App Headers.
 #include "AboutDialog.h"
+#include "ConfigDialog.h"
 #include "ComboboxDelegate.h"
 #include "MinutesHints.h"
 #include "PercentageHints.h"
 #include "SettingsDescriptionHints.h"
+#include "StopLight.h"
 #include "StopLightView.h"
-#include "TranslationHelper.h"
 #include "ui_ConfigDialog.h"
 
 // C Headers.
 #include <cstdio>
 #include <iostream>
-using namespace std;
 
 // Qt Headers.
 #include <QCheckBox>
@@ -24,7 +21,7 @@ using namespace std;
 #include <QLabel>
 #include <QLineEdit>
 
-// LXQT Headers.
+// LXQt Headers.
 #include <lxqt/pluginsettings.h>
 
 /**
@@ -32,6 +29,7 @@ using namespace std;
  */
 ConfigDialog::ConfigDialog(StopLight* stopLight,
     PluginSettings* settings, QWidget* parent) : QDialog(parent),
+
     ui(new Ui::ConfigDialog), mSettings(settings) {
 
     // Save App ref.
@@ -44,9 +42,8 @@ ConfigDialog::ConfigDialog(StopLight* stopLight,
     setFixedSize(size());
 
     // Set title & icon.
-    QString TITLE = mSettings->group() + " " + gTranslationHelper->
-        getTranslationOf("Configuration", getStringSetting(APP_LANGUAGE));
-    setWindowTitle(QString(TITLE));
+    QString TITLE = mSettings->group() + " " + tr("Configuration");
+    setWindowTitle(TITLE);
     setWindowIcon(QIcon::fromTheme(APP_ICON));
 
     // Set the window attributes, create controls & center.
@@ -55,11 +52,11 @@ ConfigDialog::ConfigDialog(StopLight* stopLight,
     createConfigDialog();
 
     // Create Buttons Layout, & create all buttons.
-    mResetButton = new QPushButton("Reset", this);
-    mAboutButton = new QPushButton("About", this);
-    mOkButton = new QPushButton("Ok", this);
-    mApplyButton = new QPushButton("Apply", this);
-    mCancelButton = new QPushButton("Cancel", this);
+    mResetButton = new QPushButton(tr("Reset"), this);
+    mAboutButton = new QPushButton(tr("About"), this);
+    mOkButton = new QPushButton(tr("Ok"), this);
+    mApplyButton = new QPushButton(tr("Apply"), this);
+    mCancelButton = new QPushButton(tr("Cancel"), this);
 
     // Ensure nothing defaults to having focus.
     mResetButton->setAutoDefault(false);
@@ -138,22 +135,14 @@ void
 ConfigDialog::createConfigDialog() {
     const int SETTINGS_SIZE = PROPERTIES.size();
 
-    const QString LANGUAGE_FOR_I18N = getStringSetting(APP_LANGUAGE);
-
-    const QString MINUTE = gTranslationHelper->getTranslationOf(
-        "minute", LANGUAGE_FOR_I18N);
-    const QString MINUTES = gTranslationHelper->getTranslationOf(
-        "minutes", LANGUAGE_FOR_I18N);
-
     for (int i = 0; i < SETTINGS_SIZE; i++) {
         const SettingsProperty THIS_SETTING = PROPERTIES[i];
 
         const QString THIS_KEY = THIS_SETTING.name;
         const QString THIS_HINT = THIS_SETTING.hint;
         const SettingsPropertyType THIS_VALUETYPE = THIS_SETTING.valueType;
-
-        const QString THIS_I18N_KEY = gTranslationHelper->
-            getTranslationOf(THIS_KEY, LANGUAGE_FOR_I18N);
+        const QString THIS_I18N_KEY = QCoreApplication::translate(
+            "ConfigDialog", THIS_KEY.toStdString().c_str());
 
         // Get QCheckBox for Booleans.
         if (THIS_VALUETYPE == BOOL_VALUETYPE) {
@@ -169,8 +158,8 @@ ConfigDialog::createConfigDialog() {
             QLabel* I_LABEL = qobject_cast<QLabel*>(mFormLayout->
                 labelForField(checkboxWidget));
             if (I_LABEL) {
-                I_LABEL->installEventFilter(
-                    new SettingsDescriptionHints(THIS_HINT));
+                I_LABEL->installEventFilter(new SettingsDescriptionHints(
+                    this, THIS_HINT));
             }
             continue;
         }
@@ -200,32 +189,8 @@ ConfigDialog::createConfigDialog() {
             QLabel* I_LABEL = qobject_cast<QLabel*>(mFormLayout->
                 labelForField(lineEditWidget));
             if (I_LABEL) {
-                I_LABEL->installEventFilter(
-                    new SettingsDescriptionHints(THIS_HINT));
-            }
-            continue;
-        }
-
-        // Get QComboBox for choices.
-        if (THIS_VALUETYPE == COMBOBOX_VALUETYPE &&
-            THIS_KEY == APP_LANGUAGE) {
-            QComboBox* langComboWidget = new QComboBox(this);
-            langComboWidget->setItemDelegate(new ComboboxDelegate(
-                langComboWidget));
-            langComboWidget->addItems(TranslationHelper::ALL_LANGUAGES);
-            langComboWidget->setObjectName(THIS_KEY);
-            mFormLayout->addRow(THIS_I18N_KEY, langComboWidget);
-            connect(langComboWidget,&QComboBox::currentIndexChanged,
-                this, [=, this] (int index) {
-                Q_UNUSED(index);
-                mSettingChanges[i] = true;
-                mApplyButton->setEnabled(true);
-            });
-            QLabel* I_LABEL = qobject_cast<QLabel*>(mFormLayout->
-                labelForField(langComboWidget));
-            if (I_LABEL) {
-                I_LABEL->installEventFilter(
-                    new SettingsDescriptionHints(THIS_HINT));
+                I_LABEL->installEventFilter(new SettingsDescriptionHints(
+                    this, THIS_HINT));
             }
             continue;
         }
@@ -253,7 +218,7 @@ ConfigDialog::createConfigDialog() {
                     labelForField(sliderEditWidget));
                 if (I_LABEL) {
                     I_LABEL->installEventFilter(
-                        new SettingsDescriptionHints(THIS_HINT));
+                        new SettingsDescriptionHints(this, THIS_HINT));
                 }
                 sliderEditWidget->installEventFilter(
                     new PercentageHints(sliderEditWidget));
@@ -279,7 +244,7 @@ ConfigDialog::createConfigDialog() {
                     labelForField(sliderEditWidget));
                 if (I_LABEL) {
                     I_LABEL->installEventFilter(
-                        new SettingsDescriptionHints(THIS_HINT));
+                        new SettingsDescriptionHints(this, THIS_HINT));
                 }
                 sliderEditWidget->installEventFilter(
                     new PercentageHints(sliderEditWidget));
@@ -306,7 +271,7 @@ ConfigDialog::createConfigDialog() {
                     labelForField(sliderEditWidget));
                 if (I_LABEL) {
                     I_LABEL->installEventFilter(
-                        new SettingsDescriptionHints(THIS_HINT));
+                        new SettingsDescriptionHints(this, THIS_HINT));
                 }
                 sliderEditWidget->installEventFilter(
                     new PercentageHints(sliderEditWidget));
@@ -317,6 +282,8 @@ ConfigDialog::createConfigDialog() {
             if (THIS_KEY == INDICATOR_UPDATE_MINS) {
                 connect(sliderEditWidget, &QSlider::valueChanged,
                     this, [=, this] (int value) {
+                    const QString MINUTE = tr("minute");
+                    const QString MINUTES = tr("minutes");
                     const QString I18N_UPDATE_TIME = (value == 1) ?
                         MINUTE : MINUTES;
                     const QString TOOLTIP_TEXT = QString::number(value) +
@@ -330,7 +297,7 @@ ConfigDialog::createConfigDialog() {
                     labelForField(sliderEditWidget));
                 if (I_LABEL) {
                     I_LABEL->installEventFilter(
-                        new SettingsDescriptionHints(THIS_HINT));
+                        new SettingsDescriptionHints(this, THIS_HINT));
                 }
                 sliderEditWidget->installEventFilter(
                     new MinutesHints(sliderEditWidget));
@@ -345,10 +312,9 @@ ConfigDialog::createConfigDialog() {
  */
 void
 ConfigDialog::translateConfigDialog() {
-    // Setup window title, 
-    QString TITLE = QString(APP_NAME) + " " + gTranslationHelper->
-        getTranslationOf("Configuration", getStringSetting(APP_LANGUAGE));
-    setWindowTitle(QString(TITLE));
+    // Set title.
+    QString TITLE = mSettings->group() + " " + tr("Configuration");
+    setWindowTitle(TITLE);
 
     // Translate all settings.
     const int FORM_LAYOUT_SIZE = mFormLayout->rowCount();
@@ -368,23 +334,18 @@ ConfigDialog::translateConfigDialog() {
         if (ROW) {
             QLabel* label = qobject_cast<QLabel*>(ROW->widget());
             if (label) {
-                const QString VALUE = gTranslationHelper->getTranslationOf(
-                    THIS_KEY, getStringSetting(APP_LANGUAGE));
+                const QString VALUE = QCoreApplication::translate(
+                    "ConfigDialog", THIS_KEY.toStdString().c_str());
                 label->setText(VALUE);
             }
         }
     }
 
-    mResetButton->setText(gTranslationHelper->getTranslationOf("Reset",
-        getStringSetting(APP_LANGUAGE)));
-    mAboutButton->setText(gTranslationHelper->getTranslationOf("About",
-        getStringSetting(APP_LANGUAGE)));
-    mOkButton->setText(gTranslationHelper->getTranslationOf("Ok",
-        getStringSetting(APP_LANGUAGE)));
-    mApplyButton->setText(gTranslationHelper->getTranslationOf("Apply",
-        getStringSetting(APP_LANGUAGE)));
-    mCancelButton->setText(gTranslationHelper->getTranslationOf("Cancel",
-        getStringSetting(APP_LANGUAGE)));
+    mResetButton->setText(tr("Reset"));
+    mAboutButton->setText(tr("About"));
+    mOkButton->setText(tr("Ok"));
+    mApplyButton->setText(tr("Apply"));
+    mCancelButton->setText(tr("Cancel"));
 
     mResetButton->clearFocus();
     mAboutButton->clearFocus();
@@ -431,20 +392,6 @@ ConfigDialog::loadConfigDialog() {
             if (lineEditWidget) {
                 const int VALUE = getIntSetting(THIS_KEY);
                 lineEditWidget->setText(QString::number(VALUE));
-            }
-            continue;
-        }
-
-        // Get QComboBox for Choices.
-        if (THIS_VALUETYPE == COMBOBOX_VALUETYPE) {
-            QComboBox* langComboWidget = nullptr;
-            langComboWidget = qobject_cast<QComboBox*>(mFormLayout->
-                itemAt(i, QFormLayout::FieldRole)->widget());
-            if (langComboWidget) {
-                const QString LANG = getStringSetting(THIS_KEY);
-                const int LANG_INDEX = TranslationHelper::
-                    ALL_LANGUAGES.indexOf(LANG);
-                langComboWidget->setCurrentIndex(LANG_INDEX);
             }
             continue;
         }
@@ -505,24 +452,6 @@ ConfigDialog::loadConfigDialogWithDefaults() {
             if (lineEditWidget) {
                 const int VALUE = getSettingsDefaultIntValue(THIS_KEY);
                 lineEditWidget->setText(QString::number(VALUE));
-            }
-            continue;
-        }
-
-        // Get QComboBox for Choices.
-        if (THIS_VALUETYPE == COMBOBOX_VALUETYPE) {
-            // Don't reset language to default.
-            if (THIS_KEY == APP_LANGUAGE) {
-                continue;
-            }
-            QComboBox* langComboWidget = nullptr;
-            langComboWidget = qobject_cast<QComboBox*>(mFormLayout->
-                itemAt(i, QFormLayout::FieldRole)->widget());
-            if (langComboWidget) {
-                const QString LANG = getSettingsDefaultStringValue(THIS_KEY);
-                const int LANG_INDEX = TranslationHelper::
-                    ALL_LANGUAGES.indexOf(LANG);
-                langComboWidget->setCurrentIndex(LANG_INDEX);
             }
             continue;
         }
@@ -604,20 +533,6 @@ ConfigDialog::acceptConfigDialog() {
             continue;
         }
 
-        // Get QComboBox for Choices.
-        if (THIS_VALUETYPE == COMBOBOX_VALUETYPE &&
-            THIS_KEY == APP_LANGUAGE) {
-            QComboBox* langComboWidget = nullptr;
-            langComboWidget = qobject_cast<QComboBox*>(mFormLayout->
-                itemAt(i, QFormLayout::FieldRole)->widget());
-            if (langComboWidget) {
-                const QString VALUE = langComboWidget->currentText();
-                setStringSetting(THIS_KEY, VALUE);
-            }
-            continue;
-        }
-
-
         // Get QSliders.
         if (THIS_VALUETYPE == SLIDER_VALUETYPE) {
             QSlider* sliderEditWidget = nullptr;
@@ -637,7 +552,8 @@ ConfigDialog::acceptConfigDialog() {
     // Redraw the StopLightView on ConfigDialog updates.
     // Update the view timer with maybe new ConfigDialog value.
     // Update the plugin view with maybe new size.
-    gStopLightView->redrawAfterConfigChanges();
+    static_cast<StopLightView*>(mStopLight->widget())->
+        redrawAfterConfigChanges();
 
     mSettingChanges.fill(false);
     mApplyButton->setEnabled(false);
@@ -691,8 +607,10 @@ ConfigDialog::resetConfigDialog() {
  */
 void
 ConfigDialog::showAboutDialog() {
-    mAboutDialog = new AboutDialog(mSettings, this);
-    mAboutDialog->show();
+    if (!mAboutDialog || !mAboutDialog->isVisible()) {
+        mAboutDialog = new AboutDialog(mSettings, this);
+        mAboutDialog->show();
+    }
 }
 
 /**
@@ -828,7 +746,7 @@ ConfigDialog::getSettingsDefaultStringValue(const QString key) {
  */
 int
 ConfigDialog::getSettingsIntRangeMinimum(const QString key) {
-    int resultValue = numeric_limits<int>::min();
+    int resultValue = std::numeric_limits<int>::min();
     const int SETTINGS_SIZE = PROPERTIES.size();
 
     for (int i = 0; i < SETTINGS_SIZE; i++) {
@@ -846,7 +764,7 @@ ConfigDialog::getSettingsIntRangeMinimum(const QString key) {
  */
 int
 ConfigDialog::getSettingsIntRangeMaximum(const QString key) {
-    int resultValue = numeric_limits<int>::max();
+    int resultValue = std::numeric_limits<int>::max();
     const int SETTINGS_SIZE = PROPERTIES.size();
 
     for (int i = 0; i < SETTINGS_SIZE; i++) {

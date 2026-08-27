@@ -36,6 +36,7 @@ TEXT_BOLD=$(getColorCode bold)
             "for faster build.""${COLOR_NORMAL}"
 
         rm -rf "$PROJ" && cmake -B "$PROJ" -S . -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_INSTALL_PREFIX=/usr
         RESULT=$?
     else
@@ -43,6 +44,7 @@ TEXT_BOLD=$(getColorCode bold)
             "build is slower.""${COLOR_NORMAL}"
 
         rm -rf "$PROJ" && cmake -B "$PROJ" -S . \
+            -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_INSTALL_PREFIX=/usr
         RESULT=$?
     fi

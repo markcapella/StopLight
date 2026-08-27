@@ -1,7 +1,0 @@
-[Desktop Entry]
-Type=Service
-ServiceTypes=LXQtPanel/Plugin
-
-Name=@APP_NAME@
-Comment=@APP_DESC@
-Icon=@APP_ICON@
