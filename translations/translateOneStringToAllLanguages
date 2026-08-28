@@ -21,7 +21,7 @@ TEXT_BOLD=$(getColorCode bold)
 # startPanelWithSanitizerBuild
 #
     echo
-    echo  -e "${COLOR_GREEN}""Translating one string to all languages."\
+    echo -e "${COLOR_GREEN}""Translating one string to all languages."\
         "${COLOR_NORMAL}"
 
     # Ensure there's a string to translate.

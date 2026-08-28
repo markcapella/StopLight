@@ -22,7 +22,7 @@ TEXT_BOLD=$(getColorCode bold)
 # startPanelWithLocale
 #
     echo
-    echo  -e "${COLOR_GREEN}""Starting panel with locale."\
+    echo -e "${COLOR_GREEN}""Starting panel with locale."\
         "${COLOR_NORMAL}"
 
     # Ensure there's a locale to use.

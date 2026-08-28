@@ -21,7 +21,7 @@ TEXT_BOLD=$(getColorCode bold)
 # displayInstalledQmFile
 #
     echo
-    echo  -e "${COLOR_GREEN}""Displaying source for an install .qm file."\
+    echo -e "${COLOR_GREEN}""Displaying source for an install .qm file."\
         "${COLOR_NORMAL}"
 
     # Ensure there's a locale to use.
