@@ -32,192 +32,192 @@
 <context>
     <name>ConfigDialog</name>
     <message>
-        <location filename="../ConfigDialog.h" line="36"/>
+        <location filename="../ConfigDialog.h" line="58"/>
         <source>Indicator Margin Size</source>
         <translation>インジケーターの余白サイズ</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="37"/>
+        <location filename="../ConfigDialog.h" line="59"/>
         <source>Indicator Shrinks to Row Height</source>
         <translation>インジケーターが行の高さに縮小</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="38"/>
+        <location filename="../ConfigDialog.h" line="60"/>
         <source>Indicator Size</source>
         <translation>インジケーターサイズ</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="39"/>
+        <location filename="../ConfigDialog.h" line="61"/>
         <source>Indicator Text Size</source>
         <translation>インジケーターの文字サイズ</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="42"/>
+        <location filename="../ConfigDialog.h" line="37"/>
         <source>Show Green Indicator</source>
         <translation>緑のインジケーターを表示</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="43"/>
+        <location filename="../ConfigDialog.h" line="38"/>
         <source>Show Green Indicator Text</source>
         <translation>緑のインジケーターテキストを表示</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="46"/>
+        <location filename="../ConfigDialog.h" line="41"/>
         <source>Show Yellow Indicator</source>
         <translation>黄色のインジケーターを表示</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="47"/>
+        <location filename="../ConfigDialog.h" line="42"/>
         <source>Show Yellow Indicator When</source>
         <translation>表示する場合は黄色のインジケーター</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="48"/>
+        <location filename="../ConfigDialog.h" line="43"/>
         <source>Show Yellow Indicator Text</source>
         <translation>黄色のインジケーターテキストを表示</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="49"/>
+        <location filename="../ConfigDialog.h" line="44"/>
         <source>Show Yellow Indicator Dialog</source>
         <translation>黄色のインジケーターダイアログを表示</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="52"/>
+        <location filename="../ConfigDialog.h" line="47"/>
         <source>Show Red Indicator</source>
         <translation>赤いインジケーターを表示</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="53"/>
+        <location filename="../ConfigDialog.h" line="48"/>
         <source>Show Red Indicator When</source>
         <translation>赤いインジケーターを表示する場合</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="54"/>
+        <location filename="../ConfigDialog.h" line="49"/>
         <source>Show Red Indicator Text</source>
         <translation>赤いインジケーターテキストを表示</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="55"/>
+        <location filename="../ConfigDialog.h" line="50"/>
         <source>Show Red Indicator Dialog</source>
         <translation>赤いインジケーターダイアログを表示</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="58"/>
+        <location filename="../ConfigDialog.h" line="53"/>
         <source>Show Text Indicator</source>
         <translation>テキスト表示インジケーター</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="61"/>
+        <location filename="../ConfigDialog.h" line="55"/>
         <source>Time between Indicator Updates</source>
         <translation>インジケーター更新間の時間</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="64"/>
+        <location filename="../ConfigDialog.h" line="54"/>
         <source>Show Icon when no Indicators</source>
         <translation>インジケーターがないときにアイコンを表示</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="65"/>
+        <location filename="../ConfigDialog.h" line="64"/>
         <source>Show Settings Hints</source>
         <translation>設定のヒントを表示</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="66"/>
+        <location filename="../ConfigDialog.h" line="65"/>
         <source>Show Icons on Buttons</source>
         <translation>ボタンにアイコンを表示</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="70"/>
+        <location filename="../ConfigDialog.h" line="69"/>
         <source>Sets left and right margin width of indicator in the panel.</source>
         <translation>パネル内のインジケーターの左右の余白幅を設定します。</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="71"/>
+        <location filename="../ConfigDialog.h" line="70"/>
         <source>Allows indicator to shrink from full panel height to grouped row height.</source>
         <translation>インジケーターが全パネルの高さからグループ化された行の高さに縮小できるようにします。</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="72"/>
+        <location filename="../ConfigDialog.h" line="71"/>
         <source>Sets indicator full size, or some percentage smaller.</source>
         <translation>インジケーターをフルサイズに設定するか、いくつかのパーセンテージだけ小さくします。</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="73"/>
+        <location filename="../ConfigDialog.h" line="72"/>
         <source>Sets indicator text fullsize, or some percentage smaller.</source>
         <translation>インジケーターのテキストをフルサイズ、または一部のパーセンテージだけ小さく設定します。</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="75"/>
+        <location filename="../ConfigDialog.h" line="74"/>
         <source>Enables or disables display of the round green indicator.</source>
         <translation>丸い緑のインジケーターの表示を有効または無効にします。</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="76"/>
+        <location filename="../ConfigDialog.h" line="75"/>
         <source>Enables or disables display of the space level text in the round green indicator.</source>
         <translation>丸い緑のインジケーターにスペースレベルのテキストを表示するかどうかを有効または無効にします。</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="78"/>
+        <location filename="../ConfigDialog.h" line="77"/>
         <source>Enables or disables display of the round yellow indicator.</source>
         <translation>丸い黄色のインジケーターの表示を有効または無効にします。</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="79"/>
+        <location filename="../ConfigDialog.h" line="78"/>
         <source>Sets the threshold for the yellow warning indicator to come on.</source>
         <translation>黄色の警告インジケーターが点灯する閾値を設定します。</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="80"/>
+        <location filename="../ConfigDialog.h" line="79"/>
         <source>Enables or disables display of the space level text in the round yellow indicator.</source>
         <translation>丸い黄色のインジケーターに表示される空間レベルのテキストの表示を有効または無効にします。</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="81"/>
+        <location filename="../ConfigDialog.h" line="80"/>
         <source>Enables or disables display of the yellow warning dialog.</source>
         <translation>黄色の警告ダイアログの表示を有効または無効にします。</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="83"/>
+        <location filename="../ConfigDialog.h" line="82"/>
         <source>Enables or disables display of the round red indicator.</source>
         <translation>丸い赤いインジケーターの表示を有効または無効にします。</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="84"/>
+        <location filename="../ConfigDialog.h" line="83"/>
         <source>Sets the threshold for the red error indicator to come on.</source>
         <translation>赤いエラーインジケーターが点灯する閾値を設定します。</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="85"/>
+        <location filename="../ConfigDialog.h" line="84"/>
         <source>Enables or disables display of the space level text in the round red indicator.</source>
         <translation>赤い丸いインジケーターの中のスペースレベルのテキストの表示を有効または無効にします。</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="86"/>
+        <location filename="../ConfigDialog.h" line="85"/>
         <source>Enables or disables display of the red warning dialog.</source>
         <translation>赤い警告ダイアログの表示を有効または無効にします。</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="88"/>
+        <location filename="../ConfigDialog.h" line="87"/>
         <source>Enables or disables display of the space level text.</source>
         <translation>スペースレベルのテキストの表示を有効または無効にします。</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="90"/>
+        <location filename="../ConfigDialog.h" line="89"/>
         <source>Sets duration between low space indicators and warnings checks.</source>
         <translation>低スペースインジケーターと警告のチェック間の期間を設定します。</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="92"/>
+        <location filename="../ConfigDialog.h" line="91"/>
         <source>Enables or disables display of the widget icon when no indicator is otherwise displayed.</source>
         <translation>他のインジケーターが表示されていない場合に、ウィジェットアイコンの表示を有効または無効にします。</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="93"/>
+        <location filename="../ConfigDialog.h" line="92"/>
         <source>Enables or disables display of these descriptions of settings on mouse hover.</source>
         <translation>マウスをホバーしたときに、これらの設定の説明の表示を有効または無効にします。</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="94"/>
+        <location filename="../ConfigDialog.h" line="93"/>
         <source>Enables or disables display of visual icons on buttons.</source>
         <translation>ボタン上の視覚アイコンの表示を有効または無効にします。</translation>
     </message>

@@ -32,192 +32,192 @@
 <context>
     <name>ConfigDialog</name>
     <message>
-        <location filename="../ConfigDialog.h" line="36"/>
+        <location filename="../ConfigDialog.h" line="58"/>
         <source>Indicator Margin Size</source>
         <translation>Indikator-Randgröße</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="37"/>
+        <location filename="../ConfigDialog.h" line="59"/>
         <source>Indicator Shrinks to Row Height</source>
         <translation>Indikator schrumpft zur Zeilenhöhe</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="38"/>
+        <location filename="../ConfigDialog.h" line="60"/>
         <source>Indicator Size</source>
         <translation>Anzeigegröße</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="39"/>
+        <location filename="../ConfigDialog.h" line="61"/>
         <source>Indicator Text Size</source>
         <translation>Indikator Textgröße</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="42"/>
+        <location filename="../ConfigDialog.h" line="37"/>
         <source>Show Green Indicator</source>
         <translation>Grünes Symbol anzeigen</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="43"/>
+        <location filename="../ConfigDialog.h" line="38"/>
         <source>Show Green Indicator Text</source>
         <translation>Grünen Indikatortext anzeigen</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="46"/>
+        <location filename="../ConfigDialog.h" line="41"/>
         <source>Show Yellow Indicator</source>
         <translation>Gelben Indikator anzeigen</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="47"/>
+        <location filename="../ConfigDialog.h" line="42"/>
         <source>Show Yellow Indicator When</source>
         <translation>Gelben Indikator anzeigen, wenn</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="48"/>
+        <location filename="../ConfigDialog.h" line="43"/>
         <source>Show Yellow Indicator Text</source>
         <translation>Gelben Indikatortext anzeigen</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="49"/>
+        <location filename="../ConfigDialog.h" line="44"/>
         <source>Show Yellow Indicator Dialog</source>
         <translation>Gelbes Indikator-Dialogfeld anzeigen</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="52"/>
+        <location filename="../ConfigDialog.h" line="47"/>
         <source>Show Red Indicator</source>
         <translation>Rote Anzeige anzeigen</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="53"/>
+        <location filename="../ConfigDialog.h" line="48"/>
         <source>Show Red Indicator When</source>
         <translation>Rote Anzeige anzeigen, wenn</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="54"/>
+        <location filename="../ConfigDialog.h" line="49"/>
         <source>Show Red Indicator Text</source>
         <translation>Rote Indikatortext anzeigen</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="55"/>
+        <location filename="../ConfigDialog.h" line="50"/>
         <source>Show Red Indicator Dialog</source>
         <translation>Rotes Indikatorsdialogfeld anzeigen</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="58"/>
+        <location filename="../ConfigDialog.h" line="53"/>
         <source>Show Text Indicator</source>
         <translation>Textanzeige anzeigen</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="61"/>
+        <location filename="../ConfigDialog.h" line="55"/>
         <source>Time between Indicator Updates</source>
         <translation>Zeit zwischen den Indikatoraktualisierungen</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="64"/>
+        <location filename="../ConfigDialog.h" line="54"/>
         <source>Show Icon when no Indicators</source>
         <translation>Symbol anzeigen, wenn keine Indikatoren vorhanden sind</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="65"/>
+        <location filename="../ConfigDialog.h" line="64"/>
         <source>Show Settings Hints</source>
         <translation>Einstellungen Hinweise anzeigen</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="66"/>
+        <location filename="../ConfigDialog.h" line="65"/>
         <source>Show Icons on Buttons</source>
         <translation>Symbole auf Schaltflächen anzeigen</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="70"/>
+        <location filename="../ConfigDialog.h" line="69"/>
         <source>Sets left and right margin width of indicator in the panel.</source>
         <translation>Legt die linke und rechte Randbreite des Indikators im Panel fest.</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="71"/>
+        <location filename="../ConfigDialog.h" line="70"/>
         <source>Allows indicator to shrink from full panel height to grouped row height.</source>
         <translation>Ermöglicht dem Indikator, von der vollen Panelhöhe auf die Höhe der gruppierten Zeile zu schrumpfen.</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="72"/>
+        <location filename="../ConfigDialog.h" line="71"/>
         <source>Sets indicator full size, or some percentage smaller.</source>
         <translation>Stellt die Indikatorgröße auf voll oder um einen bestimmten Prozentsatz kleiner ein.</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="73"/>
+        <location filename="../ConfigDialog.h" line="72"/>
         <source>Sets indicator text fullsize, or some percentage smaller.</source>
         <translation>Setzt den Indikatortext in voller Größe oder um einen bestimmten Prozentsatz kleiner.</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="75"/>
+        <location filename="../ConfigDialog.h" line="74"/>
         <source>Enables or disables display of the round green indicator.</source>
         <translation>Aktiviert oder deaktiviert die Anzeige des runden grünen Indikators.</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="76"/>
+        <location filename="../ConfigDialog.h" line="75"/>
         <source>Enables or disables display of the space level text in the round green indicator.</source>
         <translation>Aktiviert oder deaktiviert die Anzeige des Raumstufen-Textes im runden grünen Indikator.</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="78"/>
+        <location filename="../ConfigDialog.h" line="77"/>
         <source>Enables or disables display of the round yellow indicator.</source>
         <translation>Aktiviert oder deaktiviert die Anzeige des runden gelben Indikators.</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="79"/>
+        <location filename="../ConfigDialog.h" line="78"/>
         <source>Sets the threshold for the yellow warning indicator to come on.</source>
         <translation>Legt die Schwelle fest, bei der die gelbe Warnanzeige aktiviert wird.</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="80"/>
+        <location filename="../ConfigDialog.h" line="79"/>
         <source>Enables or disables display of the space level text in the round yellow indicator.</source>
         <translation>Aktiviert oder deaktiviert die Anzeige des Raumleveltextes im runden gelben Indikator.</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="81"/>
+        <location filename="../ConfigDialog.h" line="80"/>
         <source>Enables or disables display of the yellow warning dialog.</source>
         <translation>Aktiviert oder deaktiviert die Anzeige des gelben Warnfensters.</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="83"/>
+        <location filename="../ConfigDialog.h" line="82"/>
         <source>Enables or disables display of the round red indicator.</source>
         <translation>Aktiviert oder deaktiviert die Anzeige des runden roten Indikators.</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="84"/>
+        <location filename="../ConfigDialog.h" line="83"/>
         <source>Sets the threshold for the red error indicator to come on.</source>
         <translation>Legt die Schwelle fest, ab der die rote Fehleranzeige aktiviert wird.</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="85"/>
+        <location filename="../ConfigDialog.h" line="84"/>
         <source>Enables or disables display of the space level text in the round red indicator.</source>
         <translation>Aktiviert oder deaktiviert die Anzeige des Raumstufen-Textes im runden roten Indikator.</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="86"/>
+        <location filename="../ConfigDialog.h" line="85"/>
         <source>Enables or disables display of the red warning dialog.</source>
         <translation>Aktiviert oder deaktiviert die Anzeige des roten Warnfensters.</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="88"/>
+        <location filename="../ConfigDialog.h" line="87"/>
         <source>Enables or disables display of the space level text.</source>
         <translation>Aktiviert oder deaktiviert die Anzeige des Raum-Level-Textes.</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="90"/>
+        <location filename="../ConfigDialog.h" line="89"/>
         <source>Sets duration between low space indicators and warnings checks.</source>
         <translation>Legt die Dauer zwischen den Prüfungen von niedrigen Speicheranzeigen und Warnungen fest.</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="92"/>
+        <location filename="../ConfigDialog.h" line="91"/>
         <source>Enables or disables display of the widget icon when no indicator is otherwise displayed.</source>
         <translation>Aktiviert oder deaktiviert die Anzeige des Widget-Symbols, wenn ansonsten kein Indikator angezeigt wird.</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="93"/>
+        <location filename="../ConfigDialog.h" line="92"/>
         <source>Enables or disables display of these descriptions of settings on mouse hover.</source>
         <translation>Aktiviert oder deaktiviert die Anzeige dieser Beschreibungen von Einstellungen beim Überfahren mit der Maus.</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="94"/>
+        <location filename="../ConfigDialog.h" line="93"/>
         <source>Enables or disables display of visual icons on buttons.</source>
         <translation>Aktiviert oder deaktiviert die Anzeige von visuellen Symbolen auf Schaltflächen.</translation>
     </message>

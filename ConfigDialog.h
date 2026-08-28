@@ -33,35 +33,34 @@ class ConfigDialog : public QDialog {
         static inline const int CONFIG_DIALOG_HEIGHT = 750;
 
         // Configurable Settings strings.
-        static inline const QString INDICATOR_MARGIN_SIZE         = QString(QT_TR_NOOP("Indicator Margin Size"));
-        static inline const QString INDICATOR_SHRINKS_TO_ROW      = QString(QT_TR_NOOP("Indicator Shrinks to Row Height"));
-        static inline const QString INDICATOR_SIZE                = QString(QT_TR_NOOP("Indicator Size"));
-        static inline const QString INDICATOR_TEXT_SIZE           = QString(QT_TR_NOOP("Indicator Text Size"));
 
-        static inline const QString DIVIDER_1 = "01";
         static inline const QString SHOW_GREEN_INDICATOR          = QString(QT_TR_NOOP("Show Green Indicator"));
         static inline const QString SHOW_GREEN_TEXT               = QString(QT_TR_NOOP("Show Green Indicator Text"));
+        static inline const QString DIVIDER_0 = "00";
 
-        static inline const QString DIVIDER_2 = "02";
         static inline const QString SHOW_YELLOW_INDICATOR         = QString(QT_TR_NOOP("Show Yellow Indicator"));
         static inline const QString SHOW_YELLOW_AT_THRESHOLD      = QString(QT_TR_NOOP("Show Yellow Indicator When"));
         static inline const QString SHOW_YELLOW_TEXT              = QString(QT_TR_NOOP("Show Yellow Indicator Text"));
         static inline const QString SHOW_YELLOW_DIALOG            = QString(QT_TR_NOOP("Show Yellow Indicator Dialog"));
+        static inline const QString DIVIDER_1 = "01";
 
-        static inline const QString DIVIDER_3 = "03";
         static inline const QString SHOW_RED_INDICATOR            = QString(QT_TR_NOOP("Show Red Indicator"));
         static inline const QString SHOW_RED_AT_THRESHOLD         = QString(QT_TR_NOOP("Show Red Indicator When"));
         static inline const QString SHOW_RED_TEXT                 = QString(QT_TR_NOOP("Show Red Indicator Text"));
         static inline const QString SHOW_RED_DIALOG               = QString(QT_TR_NOOP("Show Red Indicator Dialog"));
+        static inline const QString DIVIDER_2 = "02";
 
-        static inline const QString DIVIDER_4 = "04";
         static inline const QString SHOW_TEXT_INDICATOR           = QString(QT_TR_NOOP("Show Text Indicator"));
-
-        static inline const QString DIVIDER_5 = "05";
-        static inline const QString INDICATOR_UPDATE_MINS         = QString(QT_TR_NOOP("Time between Indicator Updates"));
-
-        static inline const QString DIVIDER_6 = "06";
         static inline const QString SHOW_ICON_INDICATOR           = QString(QT_TR_NOOP("Show Icon when no Indicators"));
+        static inline const QString INDICATOR_UPDATE_MINS         = QString(QT_TR_NOOP("Time between Indicator Updates"));
+        static inline const QString DIVIDER_3 = "03";
+
+        static inline const QString INDICATOR_MARGIN_SIZE         = QString(QT_TR_NOOP("Indicator Margin Size"));
+        static inline const QString INDICATOR_SHRINKS_TO_ROW      = QString(QT_TR_NOOP("Indicator Shrinks to Row Height"));
+        static inline const QString INDICATOR_SIZE                = QString(QT_TR_NOOP("Indicator Size"));
+        static inline const QString INDICATOR_TEXT_SIZE           = QString(QT_TR_NOOP("Indicator Text Size"));
+        static inline const QString DIVIDER_4 = "04";
+
         static inline const QString SHOW_SETTINGS_HINTS           = QString(QT_TR_NOOP("Show Settings Hints"));
         static inline const QString SHOW_ICONS_ON_BUTTONS         = QString(QT_TR_NOOP("Show Icons on Buttons"));
 
@@ -116,30 +115,6 @@ class ConfigDialog : public QDialog {
 
         // App configurables.
         static inline const std::vector<SettingsProperty> PROPERTIES = {
-            { .name = INDICATOR_MARGIN_SIZE, .hint = INDICATOR_MARGIN_SIZE_DESC,
-              .valueType = SLIDER_VALUETYPE, .initialValue = "15",
-              .rangeMinimum = 0,.rangeMaximum = 100
-            },
-            { .name = INDICATOR_SHRINKS_TO_ROW, .hint = INDICATOR_SHRINKS_TO_ROW_DESC,
-              .valueType = BOOL_VALUETYPE, .initialValue = "false",
-              .rangeMinimum = std::numeric_limits<int>::min(),
-              .rangeMaximum = std::numeric_limits<int>::max()
-            },
-            { .name = INDICATOR_SIZE, .hint = INDICATOR_SIZE_DESC,
-              .valueType = SLIDER_VALUETYPE, .initialValue = "75",
-              .rangeMinimum = 0,.rangeMaximum = 100
-            },
-            { .name = INDICATOR_TEXT_SIZE, .hint = INDICATOR_TEXT_SIZE_DESC,
-              .valueType = SLIDER_VALUETYPE, .initialValue = "75",
-              .rangeMinimum = 0,.rangeMaximum = 100
-            },
-
-            { .name = DIVIDER_1, .hint = "",
-              .valueType = DIVIDER_VALUETYPE, .initialValue = "15",
-              .rangeMinimum = std::numeric_limits<int>::min(),
-              .rangeMaximum = std::numeric_limits<int>::max()
-            },
-
             { .name = SHOW_GREEN_INDICATOR, .hint = SHOW_GREEN_INDICATOR_DESC,
               .valueType = BOOL_VALUETYPE, .initialValue = "true",
               .rangeMinimum = std::numeric_limits<int>::min(),
@@ -151,12 +126,11 @@ class ConfigDialog : public QDialog {
               .rangeMaximum = std::numeric_limits<int>::max()
             },
 
-            { .name = DIVIDER_2, .hint = "",
+            { .name = DIVIDER_0, .hint = "",
               .valueType = DIVIDER_VALUETYPE, .initialValue = "15",
               .rangeMinimum = std::numeric_limits<int>::min(),
               .rangeMaximum = std::numeric_limits<int>::max()
             },
-
             { .name = SHOW_YELLOW_INDICATOR, .hint = SHOW_YELLOW_INDICATOR_DESC,
               .valueType = BOOL_VALUETYPE, .initialValue = "true",
               .rangeMinimum = std::numeric_limits<int>::min(),
@@ -177,12 +151,11 @@ class ConfigDialog : public QDialog {
               .rangeMaximum = std::numeric_limits<int>::max()
             },
 
-            { .name = DIVIDER_3, .hint = "",
+            { .name = DIVIDER_1, .hint = "",
               .valueType = DIVIDER_VALUETYPE, .initialValue = "15",
               .rangeMinimum = std::numeric_limits<int>::min(),
               .rangeMaximum = std::numeric_limits<int>::max()
             },
-
             { .name = SHOW_RED_INDICATOR, .hint = SHOW_RED_INDICATOR_DESC,
               .valueType = BOOL_VALUETYPE, .initialValue = "true",
               .rangeMinimum = std::numeric_limits<int>::min(),
@@ -203,37 +176,51 @@ class ConfigDialog : public QDialog {
               .rangeMaximum = std::numeric_limits<int>::max()
             },
 
-            { .name = DIVIDER_4, .hint = "",
+            { .name = DIVIDER_2, .hint = "",
               .valueType = DIVIDER_VALUETYPE, .initialValue = "15",
               .rangeMinimum = std::numeric_limits<int>::min(),
               .rangeMaximum = std::numeric_limits<int>::max()
             },
-
             { .name = SHOW_TEXT_INDICATOR, .hint = SHOW_TEXT_INDICATOR_DESC,
               .valueType = BOOL_VALUETYPE, .initialValue = "true",
               .rangeMinimum = std::numeric_limits<int>::min(),
               .rangeMaximum = std::numeric_limits<int>::max()
             },
-
-            { .name = DIVIDER_5, .hint = "",
-              .valueType = DIVIDER_VALUETYPE, .initialValue = "15",
+            { .name = SHOW_ICON_INDICATOR, .hint = SHOW_ICON_INDICATOR_DESC,
+              .valueType = BOOL_VALUETYPE, .initialValue = "true",
               .rangeMinimum = std::numeric_limits<int>::min(),
               .rangeMaximum = std::numeric_limits<int>::max()
             },
-
             { .name = INDICATOR_UPDATE_MINS, .hint = INDICATOR_UPDATE_MINS_DESC,
               .valueType = SLIDER_VALUETYPE, .initialValue = "10",
               .rangeMinimum = 1, .rangeMaximum = 60
             },
 
-            { .name = DIVIDER_6, .hint = "",
+            { .name = DIVIDER_3, .hint = "",
               .valueType = DIVIDER_VALUETYPE, .initialValue = "15",
               .rangeMinimum = std::numeric_limits<int>::min(),
               .rangeMaximum = std::numeric_limits<int>::max()
             },
+            { .name = INDICATOR_MARGIN_SIZE, .hint = INDICATOR_MARGIN_SIZE_DESC,
+              .valueType = SLIDER_VALUETYPE, .initialValue = "15",
+              .rangeMinimum = 0,.rangeMaximum = 100
+            },
+            { .name = INDICATOR_SHRINKS_TO_ROW, .hint = INDICATOR_SHRINKS_TO_ROW_DESC,
+              .valueType = BOOL_VALUETYPE, .initialValue = "false",
+              .rangeMinimum = std::numeric_limits<int>::min(),
+              .rangeMaximum = std::numeric_limits<int>::max()
+            },
+            { .name = INDICATOR_SIZE, .hint = INDICATOR_SIZE_DESC,
+              .valueType = SLIDER_VALUETYPE, .initialValue = "75",
+              .rangeMinimum = 0,.rangeMaximum = 100
+            },
+            { .name = INDICATOR_TEXT_SIZE, .hint = INDICATOR_TEXT_SIZE_DESC,
+              .valueType = SLIDER_VALUETYPE, .initialValue = "75",
+              .rangeMinimum = 0,.rangeMaximum = 100
+            },
 
-            { .name = SHOW_ICON_INDICATOR, .hint = SHOW_ICON_INDICATOR_DESC,
-              .valueType = BOOL_VALUETYPE, .initialValue = "true",
+            { .name = DIVIDER_4, .hint = "",
+              .valueType = DIVIDER_VALUETYPE, .initialValue = "15",
               .rangeMinimum = std::numeric_limits<int>::min(),
               .rangeMaximum = std::numeric_limits<int>::max()
             },

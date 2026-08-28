@@ -7,7 +7,7 @@ string(TOLOWER "${APP_NAME}" APP_ICON)
 set(APP_ICON_PATH "share/icons/hicolor/scalable/apps")
 
 set(APP_VERSION "26.08.27")
-set(APP_VERSION_MINOR "00")
+set(APP_VERSION_MINOR "01")
 
 set(APP_AUTHOR "Mark James Capella")
 set(ORG_NAME "skyrmion.inc")
