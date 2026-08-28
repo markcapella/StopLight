@@ -308,53 +308,6 @@ ConfigDialog::createConfigDialog() {
 }
 
 /**
- * Translate Settings names.
- */
-void
-ConfigDialog::translateConfigDialog() {
-    // Set title.
-    QString TITLE = mSettings->group() + " " + tr("Configuration");
-    setWindowTitle(TITLE);
-
-    // Translate all settings.
-    const int FORM_LAYOUT_SIZE = mFormLayout->rowCount();
-    for (int i = 0; i < FORM_LAYOUT_SIZE; ++i) {
-        const SettingsProperty THIS_SETTING = PROPERTIES[i];
-        const QString THIS_KEY = THIS_SETTING.name;
-        const SettingsPropertyType THIS_VALUETYPE =
-            THIS_SETTING.valueType;
-
-        // Ignore Divider lines.
-        if (THIS_VALUETYPE == DIVIDER_VALUETYPE) {
-            continue;
-        }
-
-        const QLayoutItem* ROW = mFormLayout->itemAt(
-            i, QFormLayout::LabelRole);
-        if (ROW) {
-            QLabel* label = qobject_cast<QLabel*>(ROW->widget());
-            if (label) {
-                const QString VALUE = QCoreApplication::translate(
-                    "ConfigDialog", THIS_KEY.toStdString().c_str());
-                label->setText(VALUE);
-            }
-        }
-    }
-
-    mResetButton->setText(tr("Reset"));
-    mAboutButton->setText(tr("About"));
-    mOkButton->setText(tr("Ok"));
-    mApplyButton->setText(tr("Apply"));
-    mCancelButton->setText(tr("Cancel"));
-
-    mResetButton->clearFocus();
-    mAboutButton->clearFocus();
-    mOkButton->clearFocus();
-    mApplyButton->clearFocus();
-    mCancelButton->clearFocus();
-}
-
-/**
  * Load dialog with settings values.
  */
 void
@@ -545,9 +498,6 @@ ConfigDialog::acceptConfigDialog() {
             continue;
         }
     }
-
-    // Translate controls to new lang for next time.
-    translateConfigDialog();
 
     // Redraw the StopLightView on ConfigDialog updates.
     // Update the view timer with maybe new ConfigDialog value.

@@ -223,37 +223,31 @@
     </message>
     <message>
         <location filename="../ConfigDialog.cpp" line="45"/>
-        <location filename="../ConfigDialog.cpp" line="316"/>
         <source>Configuration</source>
         <translation>構成</translation>
     </message>
     <message>
         <location filename="../ConfigDialog.cpp" line="55"/>
-        <location filename="../ConfigDialog.cpp" line="344"/>
         <source>Reset</source>
         <translation>リセット</translation>
     </message>
     <message>
         <location filename="../ConfigDialog.cpp" line="56"/>
-        <location filename="../ConfigDialog.cpp" line="345"/>
         <source>About</source>
         <translation>約</translation>
     </message>
     <message>
         <location filename="../ConfigDialog.cpp" line="57"/>
-        <location filename="../ConfigDialog.cpp" line="346"/>
         <source>Ok</source>
         <translation>「オーケー」</translation>
     </message>
     <message>
         <location filename="../ConfigDialog.cpp" line="58"/>
-        <location filename="../ConfigDialog.cpp" line="347"/>
         <source>Apply</source>
         <translation>適用する</translation>
     </message>
     <message>
         <location filename="../ConfigDialog.cpp" line="59"/>
-        <location filename="../ConfigDialog.cpp" line="348"/>
         <source>Cancel</source>
         <translation>キャンセル</translation>
     </message>

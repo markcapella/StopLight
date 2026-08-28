@@ -275,11 +275,6 @@ class ConfigDialog : public QDialog {
         void createConfigDialog();
 
         /**
-         * Translate Settings names.
-         */
-        void translateConfigDialog();
-
-        /**
          * Load dialog with settings values.
          */
         void loadConfigDialog();

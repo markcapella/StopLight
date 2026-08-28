@@ -223,37 +223,31 @@
     </message>
     <message>
         <location filename="../ConfigDialog.cpp" line="45"/>
-        <location filename="../ConfigDialog.cpp" line="316"/>
         <source>Configuration</source>
         <translation>Configuration</translation>
     </message>
     <message>
         <location filename="../ConfigDialog.cpp" line="55"/>
-        <location filename="../ConfigDialog.cpp" line="344"/>
         <source>Reset</source>
         <translation>Réinitialiser</translation>
     </message>
     <message>
         <location filename="../ConfigDialog.cpp" line="56"/>
-        <location filename="../ConfigDialog.cpp" line="345"/>
         <source>About</source>
         <translation>À propos</translation>
     </message>
     <message>
         <location filename="../ConfigDialog.cpp" line="57"/>
-        <location filename="../ConfigDialog.cpp" line="346"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
         <location filename="../ConfigDialog.cpp" line="58"/>
-        <location filename="../ConfigDialog.cpp" line="347"/>
         <source>Apply</source>
         <translation>Appliquer</translation>
     </message>
     <message>
         <location filename="../ConfigDialog.cpp" line="59"/>
-        <location filename="../ConfigDialog.cpp" line="348"/>
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
