@@ -47,5 +47,5 @@ TEXT_BOLD=$(getColorCode bold)
     LANG="$LANG_LOWER"_FR.UTF-8 LANGUAGE="$LANG_LOWER" lxqt-panel
 
     echo
-    echo -e "${COLOR_GREEN}"Starting panel with locale complete."\
+    echo -e "${COLOR_GREEN}""Starting panel with locale complete."\
         "${COLOR_NORMAL}"

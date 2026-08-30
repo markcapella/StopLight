@@ -253,15 +253,15 @@ const QStringList INDICATOR_TEXT_SIZE_DESC = {
 };
 
 const QStringList SHOW_GREEN_INDICATOR = {
-    "Show Green Indicator",
-    "Grünes Symbol anzeigen",
-    "Mostrar indicador verde",
-    "Afficher l'indicateur vert",
-    "Mostra indicatore verde",
-    "緑のインジケーターを表示",
-    "Toon groen indicator",
-    "Mostrar Indicador Verde",
-    "Показать зелёный индикатор"
+    "🟢 Show Green Indicator",
+    "🟢 Grünen Indikator anzeigen",
+    "🟢 Mostrar indicador verde",
+    "🟢 Afficher l'indicateur vert",
+    "🟢 Mostra Indicatore Verde",
+    "🟢 緑のインジケーターを表示",
+    "🟢 Toon groene indicator",
+    "🟢 Mostrar Indicador Verde",
+    "🟢 Показать зелёный индикатор"
 };
 
 const QStringList SHOW_GREEN_INDICATOR_DESC = {
@@ -301,15 +301,15 @@ const QStringList SHOW_GREEN_TEXT_DESC = {
 };
 
 const QStringList SHOW_YELLOW_INDICATOR = {
-    "Show Yellow Indicator",
-    "Gelben Indikator anzeigen",
-    "Mostrar indicador amarillo",
-    "Afficher l'indicateur jaune",
-    "Mostra indicatore giallo",
-    "黄色のインジケーターを表示",
-    "Toon geel indicator",
-    "Mostrar indicador amarelo",
-    "Показать жёлтый индикатор"
+    "🟡 Show Yellow Indicator",
+    "🟡 Gelben Indikator anzeigen",
+    "🟡 Mostrar indicador amarillo",
+    "🟡 Afficher l'indicateur jaune",
+    "🟡 Mostra Indicatore Giallo",
+    "🟡 黄色のインジケーターを表示",
+    "🟡 Toon Gele Indicator",
+    "🟡 Mostrar Indicador Amarelo",
+    "🟡 Показать жёлтый индикатор"
 };
 
 const QStringList SHOW_YELLOW_INDICATOR_DESC = {
@@ -397,15 +397,15 @@ const QStringList SHOW_YELLOW_DIALOG_DESC = {
 };
 
 const QStringList SHOW_RED_INDICATOR = {
-    "Show Red Indicator",
-    "Rote Anzeige anzeigen",
-    "Mostrar indicador rojo",
-    "Afficher l'indicateur rouge",
-    "Mostra indicatore rosso",
-    "赤いインジケーターを表示",
-    "Toon rood indicator",
-    "Mostrar Indicador Vermelho",
-    "Показать красный индикатор"
+    "🔴 Show Red Indicator",
+    "🔴 Rote Anzeige anzeigen",
+    "🔴 Mostrar indicador rojo",
+    "🔴 Afficher l'indicateur rouge",
+    "🔴 Mostra Indicatore Rosso",
+    "🔴 赤のインジケーターを表示",
+    "🔴 Toon Rode Indicator",
+    "🔴 Mostrar Indicador Vermelho",
+    "🔴 Показать красный индикатор"
 };
 
 const QStringList SHOW_RED_INDICATOR_DESC = {

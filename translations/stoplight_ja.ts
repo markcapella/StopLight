@@ -52,9 +52,8 @@
         <translation>インジケーターの文字サイズ</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="37"/>
         <source>Show Green Indicator</source>
-        <translation>緑のインジケーターを表示</translation>
+        <translation type="vanished">緑のインジケーターを表示</translation>
     </message>
     <message>
         <location filename="../ConfigDialog.h" line="38"/>
@@ -62,9 +61,8 @@
         <translation>緑のインジケーターテキストを表示</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="41"/>
         <source>Show Yellow Indicator</source>
-        <translation>黄色のインジケーターを表示</translation>
+        <translation type="vanished">黄色のインジケーターを表示</translation>
     </message>
     <message>
         <location filename="../ConfigDialog.h" line="42"/>
@@ -82,9 +80,8 @@
         <translation>黄色のインジケーターダイアログを表示</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="47"/>
         <source>Show Red Indicator</source>
-        <translation>赤いインジケーターを表示</translation>
+        <translation type="vanished">赤いインジケーターを表示</translation>
     </message>
     <message>
         <location filename="../ConfigDialog.h" line="48"/>
@@ -115,6 +112,21 @@
         <location filename="../ConfigDialog.h" line="54"/>
         <source>Show Icon when no Indicators</source>
         <translation>インジケーターがないときにアイコンを表示</translation>
+    </message>
+    <message>
+        <location filename="../ConfigDialog.h" line="37"/>
+        <source>🟢 Show Green Indicator</source>
+        <translation>🟢 緑のインジケーターを表示</translation>
+    </message>
+    <message>
+        <location filename="../ConfigDialog.h" line="41"/>
+        <source>🟡 Show Yellow Indicator</source>
+        <translation>🟡 黄色のインジケーターを表示</translation>
+    </message>
+    <message>
+        <location filename="../ConfigDialog.h" line="47"/>
+        <source>🔴 Show Red Indicator</source>
+        <translation>🔴 赤のインジケーターを表示</translation>
     </message>
     <message>
         <location filename="../ConfigDialog.h" line="64"/>

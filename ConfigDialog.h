@@ -34,17 +34,17 @@ class ConfigDialog : public QDialog {
 
         // Configurable Settings strings.
 
-        static inline const QString SHOW_GREEN_INDICATOR          = QString(QT_TR_NOOP("Show Green Indicator"));
+        static inline const QString SHOW_GREEN_INDICATOR          = QString(QT_TR_NOOP("🟢 Show Green Indicator"));
         static inline const QString SHOW_GREEN_TEXT               = QString(QT_TR_NOOP("Show Green Indicator Text"));
         static inline const QString DIVIDER_0 = "00";
 
-        static inline const QString SHOW_YELLOW_INDICATOR         = QString(QT_TR_NOOP("Show Yellow Indicator"));
+        static inline const QString SHOW_YELLOW_INDICATOR         = QString(QT_TR_NOOP("🟡 Show Yellow Indicator"));
         static inline const QString SHOW_YELLOW_AT_THRESHOLD      = QString(QT_TR_NOOP("Show Yellow Indicator When"));
         static inline const QString SHOW_YELLOW_TEXT              = QString(QT_TR_NOOP("Show Yellow Indicator Text"));
         static inline const QString SHOW_YELLOW_DIALOG            = QString(QT_TR_NOOP("Show Yellow Indicator Dialog"));
         static inline const QString DIVIDER_1 = "01";
 
-        static inline const QString SHOW_RED_INDICATOR            = QString(QT_TR_NOOP("Show Red Indicator"));
+        static inline const QString SHOW_RED_INDICATOR            = QString(QT_TR_NOOP("🔴 Show Red Indicator"));
         static inline const QString SHOW_RED_AT_THRESHOLD         = QString(QT_TR_NOOP("Show Red Indicator When"));
         static inline const QString SHOW_RED_TEXT                 = QString(QT_TR_NOOP("Show Red Indicator Text"));
         static inline const QString SHOW_RED_DIALOG               = QString(QT_TR_NOOP("Show Red Indicator Dialog"));

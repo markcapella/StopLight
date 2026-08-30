@@ -52,9 +52,8 @@
         <translation>Dimensione del testo dell&apos;indicatore</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="37"/>
         <source>Show Green Indicator</source>
-        <translation>Mostra indicatore verde</translation>
+        <translation type="vanished">Mostra indicatore verde</translation>
     </message>
     <message>
         <location filename="../ConfigDialog.h" line="38"/>
@@ -62,9 +61,8 @@
         <translation>Mostra testo indicatore verde</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="41"/>
         <source>Show Yellow Indicator</source>
-        <translation>Mostra indicatore giallo</translation>
+        <translation type="vanished">Mostra indicatore giallo</translation>
     </message>
     <message>
         <location filename="../ConfigDialog.h" line="42"/>
@@ -82,9 +80,8 @@
         <translation>Mostra la finestra di dialogo dell&apos;indicatore giallo</translation>
     </message>
     <message>
-        <location filename="../ConfigDialog.h" line="47"/>
         <source>Show Red Indicator</source>
-        <translation>Mostra indicatore rosso</translation>
+        <translation type="vanished">Mostra indicatore rosso</translation>
     </message>
     <message>
         <location filename="../ConfigDialog.h" line="48"/>
@@ -115,6 +112,21 @@
         <location filename="../ConfigDialog.h" line="54"/>
         <source>Show Icon when no Indicators</source>
         <translation>Mostra icona quando non ci sono indicatori</translation>
+    </message>
+    <message>
+        <location filename="../ConfigDialog.h" line="37"/>
+        <source>🟢 Show Green Indicator</source>
+        <translation>🟢 Mostra Indicatore Verde</translation>
+    </message>
+    <message>
+        <location filename="../ConfigDialog.h" line="41"/>
+        <source>🟡 Show Yellow Indicator</source>
+        <translation>🟡 Mostra Indicatore Giallo</translation>
+    </message>
+    <message>
+        <location filename="../ConfigDialog.h" line="47"/>
+        <source>🔴 Show Red Indicator</source>
+        <translation>🔴 Mostra Indicatore Rosso</translation>
     </message>
     <message>
         <location filename="../ConfigDialog.h" line="64"/>

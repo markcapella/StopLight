@@ -64,7 +64,7 @@ TEXT_BOLD=$(getColorCode bold)
         *)
             echo
             echo -e "${COLOR_YELLOW}""   Removed project"\
-                "build folder:""---> ""$PROJ""${COLOR_NORMAL}"\
+                "build folder ---> ""$PROJ""${COLOR_NORMAL}"\
                 "${COLOR_NORMAL}"
             rm -rf "$PROJ"
             RESULT=$?
