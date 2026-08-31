@@ -63,7 +63,9 @@ TEXT_BOLD=$(getColorCode bold)
         exit 2
     fi
 
-    # Summarize result for TranslationHelperStrings.h
+    # Summarize result for merging with APP_TRANSLATION_STRINGS.h
+    # then merging to .ts files with translateHelperStringsToTs and
+    # translateTsToDesktop.
     echo "const QStringList FOO = {"
     echo "    \"""$1""\","
     echo "    \"""$TEXT_de""\","

@@ -133,7 +133,7 @@ def main():
     if len(sys.argv) != 3:
         print(
             f"Usage: {sys.argv[0]} "
-            "<TranslationHelperStrings.h> <ts-directory>"
+            "<APP_TRANSLATION_STRINGS.h> <ts-directory>"
         )
         sys.exit(1)
 
