@@ -2,11 +2,12 @@
 # CMakeLists.txt to build plugin for LXQT panel.
 #
 set(APP_NAME "stoplight")
+set(DESKTOP_NAME "StopLight")
 
 string(TOLOWER "${APP_NAME}" APP_ICON)
 set(APP_ICON_PATH "share/icons/hicolor/scalable/apps")
 
-set(APP_VERSION "26.08.29")
+set(APP_VERSION "26.10.01")
 set(APP_VERSION_MINOR "00")
 
 set(APP_AUTHOR "Mark James Capella")
@@ -215,7 +216,7 @@ target_link_options(${PLUGIN} PRIVATE
 # Create C++ Global #defines.
 #
 target_compile_definitions(${PLUGIN} PRIVATE
-    APP_NAME="${APP_NAME}"
+    DESKTOP_NAME="${DESKTOP_NAME}"
     APP_VERSION="${APP_VERSION}"
     APP_VERSION_MINOR="${APP_VERSION_MINOR}"
     APP_AUTHOR="${APP_AUTHOR}"
@@ -249,7 +250,7 @@ target_link_libraries(${PLUGIN} Qt6::Widgets lxqt ${LIBRARIES}
 #target_link_options(${PLUGIN} PUBLIC -fsanitize=address)
 
 ##
-# Install plugin .desktop.
+# Compile optimizations.
 #
 install(TARGETS ${PLUGIN}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/lxqt-panel
@@ -262,6 +263,9 @@ if(CMAKE_BUILD_TYPE STREQUAL "Release")
     )
 endif()
 
+##
+# Install plugin .desktop.
+#
 configure_file(resources/${APP_NAME}.desktop.in
     ${CMAKE_CURRENT_BINARY_DIR}/${APP_NAME}.desktop @ONLY)
 

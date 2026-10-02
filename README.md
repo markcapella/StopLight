@@ -42,10 +42,12 @@
 > This is automated. The build system will warn you of missing packages.
 
 ### Clone StopLight source folder, and cd into it.
+
     git clone https://github.com/markcapella/StopLight
     cd StopLight
 
 ## Basic development.
+
 ```bash
 ./startPlugin
 ```
@@ -61,6 +63,7 @@
 ```bash
 ./cleanPlugin
 ```
+
 ## Usage after install.
 
 ### LXQT Desktop with lxqt-panel.

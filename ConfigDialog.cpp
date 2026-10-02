@@ -42,7 +42,7 @@ ConfigDialog::ConfigDialog(StopLight* stopLight,
     setFixedSize(size());
 
     // Set title & icon.
-    QString TITLE = mSettings->group() + " " + tr("Configuration");
+    QString TITLE = DESKTOP_NAME + QString(" ") + tr("Configuration");
     setWindowTitle(TITLE);
     setWindowIcon(QIcon::fromTheme(APP_ICON));
 
@@ -65,7 +65,8 @@ ConfigDialog::ConfigDialog(StopLight* stopLight,
     mApplyButton->setAutoDefault(false);
     mCancelButton->setAutoDefault(false);
 
-    const bool SHOULD_DISPLAY_ICONS = getBoolSetting(SHOW_ICONS_ON_BUTTONS);
+    const bool SHOULD_DISPLAY_ICONS = getBoolSetting(
+        SHOW_ICONS_ON_BUTTONS);
     if (SHOULD_DISPLAY_ICONS) {
         mResetButton->setIcon(QIcon::fromTheme("edit-undo"));
         mAboutButton->setIcon(QIcon::fromTheme("help-about"));
@@ -80,7 +81,7 @@ ConfigDialog::ConfigDialog(StopLight* stopLight,
         mCancelButton->setIcon(QIcon());
     }
 
-    // Add all buttons to the layout.
+    // Create Buttons Layout, add all buttons.
     mButtonLayout = new QHBoxLayout();
     mButtonLayout->addWidget(mResetButton);
     mButtonLayout->addWidget(mAboutButton);
@@ -94,7 +95,7 @@ ConfigDialog::ConfigDialog(StopLight* stopLight,
 
     // Connect all button click signals.
     connect(mResetButton, &QPushButton::clicked, this,
-        &ConfigDialog::resetConfigDialog);
+        &ConfigDialog::loadConfigDialogWithDefaults);
     connect(mAboutButton, &QPushButton::clicked, this,
         &ConfigDialog::showAboutDialog);
 
@@ -122,8 +123,6 @@ ConfigDialog::~ConfigDialog() {
 void
 ConfigDialog::showEvent(QShowEvent* event) {
     loadConfigDialog();
-    mSettingChanges.fill(false);
-    mApplyButton->setEnabled(false);
 
     QDialog::showEvent(event);
 }
@@ -144,6 +143,16 @@ ConfigDialog::createConfigDialog() {
         const QString THIS_I18N_KEY = QCoreApplication::translate(
             "ConfigDialog", THIS_KEY.toStdString().c_str());
 
+        // Get QLineEdit for Divider lines.
+        if (THIS_VALUETYPE == DIVIDER_VALUETYPE) {
+            QLabel* dividerWidget = new QLabel(this);
+            dividerWidget->setObjectName(THIS_KEY);
+            const int SLIDER_HEIGHT_VALUE = getIntSetting(THIS_KEY);
+            dividerWidget->setFixedHeight(SLIDER_HEIGHT_VALUE);
+            mFormLayout->addRow("", dividerWidget);
+            continue;
+        }
+
         // Get QCheckBox for Booleans.
         if (THIS_VALUETYPE == BOOL_VALUETYPE) {
             QCheckBox* checkboxWidget = new QCheckBox(this);
@@ -155,22 +164,12 @@ ConfigDialog::createConfigDialog() {
                 mSettingChanges[i] = true;
                 mApplyButton->setEnabled(true);
             });
-            QLabel* I_LABEL = qobject_cast<QLabel*>(mFormLayout->
+            QLabel* HINT_LABEL = qobject_cast<QLabel*>(mFormLayout->
                 labelForField(checkboxWidget));
-            if (I_LABEL) {
-                I_LABEL->installEventFilter(new SettingsDescriptionHints(
+            if (HINT_LABEL) {
+                HINT_LABEL->installEventFilter(new SettingsDescriptionHints(
                     this, THIS_HINT));
             }
-            continue;
-        }
-
-        // Get QLineEdit for Divider lines.
-        if (THIS_VALUETYPE == DIVIDER_VALUETYPE) {
-            QLabel* dividerWidget = new QLabel(this);
-            dividerWidget->setObjectName(THIS_KEY);
-            const int SLIDER_HEIGHT_VALUE = getIntSetting(THIS_KEY);
-            dividerWidget->setFixedHeight(SLIDER_HEIGHT_VALUE);
-            mFormLayout->addRow("", dividerWidget);
             continue;
         }
 
@@ -186,10 +185,10 @@ ConfigDialog::createConfigDialog() {
                 mSettingChanges[i] = true;
                 mApplyButton->setEnabled(true);
             });
-            QLabel* I_LABEL = qobject_cast<QLabel*>(mFormLayout->
+            QLabel* HINT_LABEL = qobject_cast<QLabel*>(mFormLayout->
                 labelForField(lineEditWidget));
-            if (I_LABEL) {
-                I_LABEL->installEventFilter(new SettingsDescriptionHints(
+            if (HINT_LABEL) {
+                HINT_LABEL->installEventFilter(new SettingsDescriptionHints(
                     this, THIS_HINT));
             }
             continue;
@@ -214,10 +213,10 @@ ConfigDialog::createConfigDialog() {
                     mSettingChanges[i] = true;
                     mApplyButton->setEnabled(true);
                 });
-                QLabel* I_LABEL = qobject_cast<QLabel*>(mFormLayout->
+                QLabel* HINT_LABEL = qobject_cast<QLabel*>(mFormLayout->
                     labelForField(sliderEditWidget));
-                if (I_LABEL) {
-                    I_LABEL->installEventFilter(
+                if (HINT_LABEL) {
+                    HINT_LABEL->installEventFilter(
                         new SettingsDescriptionHints(this, THIS_HINT));
                 }
                 sliderEditWidget->installEventFilter(
@@ -240,10 +239,10 @@ ConfigDialog::createConfigDialog() {
                         RED_WIDGET->setSliderPosition(value);
                     }
                 });
-                QLabel* I_LABEL = qobject_cast<QLabel*>(mFormLayout->
+                QLabel* HINT_LABEL = qobject_cast<QLabel*>(mFormLayout->
                     labelForField(sliderEditWidget));
-                if (I_LABEL) {
-                    I_LABEL->installEventFilter(
+                if (HINT_LABEL) {
+                    HINT_LABEL->installEventFilter(
                         new SettingsDescriptionHints(this, THIS_HINT));
                 }
                 sliderEditWidget->installEventFilter(
@@ -267,10 +266,10 @@ ConfigDialog::createConfigDialog() {
                         YELLOW_WIDGET->setSliderPosition(value);
                     }
                 });
-                QLabel* I_LABEL = qobject_cast<QLabel*>(mFormLayout->
+                QLabel* HINT_LABEL = qobject_cast<QLabel*>(mFormLayout->
                     labelForField(sliderEditWidget));
-                if (I_LABEL) {
-                    I_LABEL->installEventFilter(
+                if (HINT_LABEL) {
+                    HINT_LABEL->installEventFilter(
                         new SettingsDescriptionHints(this, THIS_HINT));
                 }
                 sliderEditWidget->installEventFilter(
@@ -293,10 +292,10 @@ ConfigDialog::createConfigDialog() {
                     mSettingChanges[i] = true;
                     mApplyButton->setEnabled(true);
                 });
-                QLabel* I_LABEL = qobject_cast<QLabel*>(mFormLayout->
+                QLabel* HINT_LABEL = qobject_cast<QLabel*>(mFormLayout->
                     labelForField(sliderEditWidget));
-                if (I_LABEL) {
-                    I_LABEL->installEventFilter(
+                if (HINT_LABEL) {
+                    HINT_LABEL->installEventFilter(
                         new SettingsDescriptionHints(this, THIS_HINT));
                 }
                 sliderEditWidget->installEventFilter(
@@ -365,6 +364,9 @@ ConfigDialog::loadConfigDialog() {
             continue;
         }
     }
+
+    mSettingChanges.fill(false);
+    mApplyButton->setEnabled(false);
 }
 
 /**
@@ -425,6 +427,9 @@ ConfigDialog::loadConfigDialogWithDefaults() {
             continue;
         }
     }
+
+    mSettingChanges.fill(true);
+    mApplyButton->setEnabled(true);
 }
 
 /**
@@ -505,10 +510,9 @@ ConfigDialog::acceptConfigDialog() {
     static_cast<StopLightView*>(mStopLight->widget())->
         redrawAfterConfigChanges();
 
-    mSettingChanges.fill(false);
-    mApplyButton->setEnabled(false);
-
-    const bool SHOULD_DISPLAY_ICONS = getBoolSetting(SHOW_ICONS_ON_BUTTONS);
+    // Myabe reset icon images.
+    const bool SHOULD_DISPLAY_ICONS = getBoolSetting(
+        SHOW_ICONS_ON_BUTTONS);
     if (SHOULD_DISPLAY_ICONS) {
         mResetButton->setIcon(QIcon::fromTheme("edit-undo"));
         mAboutButton->setIcon(QIcon::fromTheme("help-about"));
@@ -522,6 +526,10 @@ ConfigDialog::acceptConfigDialog() {
         mApplyButton->setIcon(QIcon());
         mCancelButton->setIcon(QIcon());
     }
+
+    // Done.
+    mSettingChanges.fill(false);
+    mApplyButton->setEnabled(false);
 }
 
 /**
@@ -541,26 +549,15 @@ ConfigDialog::cancelConfigDialog() {
 }
 
 /**
- * Reset all settings values to default.
- */
-void
-ConfigDialog::resetConfigDialog() {
-    loadConfigDialogWithDefaults();
-
-    mSettingChanges.fill(true);
-
-    mApplyButton->setEnabled(true);
-}
-
-/**
  * Show this apps "About" dialog.
  */
 void
 ConfigDialog::showAboutDialog() {
-    if (!mAboutDialog || !mAboutDialog->isVisible()) {
-        mAboutDialog = new AboutDialog(mSettings, this);
-        mAboutDialog->show();
-    }
+    mAboutDialog = new AboutDialog(mSettings, this);
+
+    mAboutDialog->show();
+    mAboutDialog->raise();
+    mAboutDialog->activateWindow();
 }
 
 /**

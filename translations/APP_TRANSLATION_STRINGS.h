@@ -144,7 +144,7 @@ const QStringList APP_LANGUAGE = {
     "Taal", "Linguagem", "Язык"
 };
 
-const QStringList APP_LANGUAGE_DESC = {
+const QStringList APP_LANGUAGE_HINT = {
     "The language you'd like to see displayed, when viewing the Configuration or About Dialogs.",
     "Die Sprache, die Sie sehen möchten, wenn Sie die Konfigurations- oder Info-Dialoge anzeigen.",
     "El idioma que le gustaría ver mostrado al visualizar los cuadros de diálogo de Configuración o Acerca de.",
@@ -168,7 +168,7 @@ const QStringList INDICATOR_MARGIN_SIZE = {
     "Размер отступа индикатора"
 };
 
-const QStringList INDICATOR_MARGIN_SIZE_DESC = {
+const QStringList INDICATOR_MARGIN_SIZE_HINT = {
     "Sets left and right margin width of indicator in the panel.",
     "Legt die linke und rechte Randbreite des Indikators im Panel fest.",
     "Establece el ancho del margen izquierdo y derecho del indicador en el panel.",
@@ -192,7 +192,7 @@ const QStringList INDICATOR_SHRINKS_TO_ROW = {
     "Индикатор сжимается до высоты строки"
 };
 
-const QStringList INDICATOR_SHRINKS_TO_ROW_DESC = {
+const QStringList INDICATOR_SHRINKS_TO_ROW_HINT = {
     "Allows indicator to shrink from full panel height to grouped row height.",
     "Ermöglicht dem Indikator, von der vollen Panelhöhe auf die Höhe der gruppierten Zeile zu schrumpfen.",
     "Permite que el indicador se reduzca desde la altura completa del panel hasta la altura de la fila agrupada.",
@@ -216,7 +216,7 @@ const QStringList INDICATOR_SIZE = {
     "Размер индикатора"
 };
 
-const QStringList INDICATOR_SIZE_DESC = {
+const QStringList INDICATOR_SIZE_HINT = {
     "Sets indicator full size, or some percentage smaller.",
     "Stellt die Indikatorgröße auf voll oder um einen bestimmten Prozentsatz kleiner ein.",
     "Establece el indicador a tamaño completo, o un porcentaje menor.",
@@ -240,7 +240,7 @@ const QStringList INDICATOR_TEXT_SIZE = {
     "Размер текста индикатора"
 };
 
-const QStringList INDICATOR_TEXT_SIZE_DESC = {
+const QStringList INDICATOR_TEXT_SIZE_HINT = {
     "Sets indicator text fullsize, or some percentage smaller.",
     "Setzt den Indikatortext in voller Größe oder um einen bestimmten Prozentsatz kleiner.",
     "Establece el texto del indicador a tamaño completo, o un porcentaje menor.",
@@ -264,7 +264,7 @@ const QStringList SHOW_GREEN_INDICATOR = {
     "🟢 Показать зелёный индикатор"
 };
 
-const QStringList SHOW_GREEN_INDICATOR_DESC = {
+const QStringList SHOW_GREEN_INDICATOR_HINT = {
     "Enables or disables display of the round green indicator.",
     "Aktiviert oder deaktiviert die Anzeige des runden grünen Indikators.",
     "Habilita o deshabilita la visualización del indicador verde redondo.",
@@ -288,7 +288,7 @@ const QStringList SHOW_GREEN_TEXT = {
     "Показать зелёный индикаторный текст"
 };
 
-const QStringList SHOW_GREEN_TEXT_DESC = {
+const QStringList SHOW_GREEN_TEXT_HINT = {
     "Enables or disables display of the space level text in the round green indicator.",
     "Aktiviert oder deaktiviert die Anzeige des Raumstufen-Textes im runden grünen Indikator.",
     "Habilita o deshabilita la visualización del texto del nivel de espacio en el indicador verde redondo.",
@@ -312,7 +312,7 @@ const QStringList SHOW_YELLOW_INDICATOR = {
     "🟡 Показать жёлтый индикатор"
 };
 
-const QStringList SHOW_YELLOW_INDICATOR_DESC = {
+const QStringList SHOW_YELLOW_INDICATOR_HINT = {
     "Enables or disables display of the round yellow indicator.",
     "Aktiviert oder deaktiviert die Anzeige des runden gelben Indikators.",
     "Habilita o deshabilita la visualización del indicador amarillo redondo.",
@@ -336,7 +336,7 @@ const QStringList SHOW_YELLOW_AT_THRESHOLD = {
     "Показывать жёлтый индикатор, когда"
 };
 
-const QStringList SHOW_YELLOW_AT_THRESHOLD_DESC = {
+const QStringList SHOW_YELLOW_AT_THRESHOLD_HINT = {
     "Sets the threshold for the yellow warning indicator to come on.",
     "Legt die Schwelle fest, bei der die gelbe Warnanzeige aktiviert wird.",
     "Establece el umbral para que se encienda el indicador de advertencia amarillo.",
@@ -360,7 +360,7 @@ const QStringList SHOW_YELLOW_TEXT = {
     "Показать текст жёлтого индикатора"
 };
 
-const QStringList SHOW_YELLOW_TEXT_DESC = {
+const QStringList SHOW_YELLOW_TEXT_HINT = {
     "Enables or disables display of the space level text in the round yellow indicator.",
     "Aktiviert oder deaktiviert die Anzeige des Raumleveltextes im runden gelben Indikator.",
     "Habilita o deshabilita la visualización del texto del nivel de espacio en el indicador amarillo redondo.",
@@ -384,7 +384,7 @@ const QStringList SHOW_YELLOW_DIALOG = {
     "Показать диалог желтого индикатора"
 };
 
-const QStringList SHOW_YELLOW_DIALOG_DESC = {
+const QStringList SHOW_YELLOW_DIALOG_HINT = {
     "Enables or disables display of the yellow warning dialog.",
     "Aktiviert oder deaktiviert die Anzeige des gelben Warnfensters.",
     "Habilita o deshabilita la visualización del cuadro de diálogo de advertencia amarillo.",
@@ -408,7 +408,10 @@ const QStringList SHOW_RED_INDICATOR = {
     "🔴 Показать красный индикатор"
 };
 
-const QStringList SHOW_RED_INDICATOR_DESC = {
+/**
+ * Settings hints.
+ */
+const QStringList SHOW_RED_INDICATOR_HINT = {
     "Enables or disables display of the round red indicator.",
     "Aktiviert oder deaktiviert die Anzeige des runden roten Indikators.",
     "Habilita o deshabilita la visualización del indicador rojo redondo.",
@@ -432,7 +435,7 @@ const QStringList SHOW_RED_AT_THRESHOLD = {
     "Показывать красный индикатор когда"
 };
 
-const QStringList SHOW_RED_AT_THRESHOLD_DESC = {
+const QStringList SHOW_RED_AT_THRESHOLD_HINT = {
     "Sets the threshold for the red error indicator to come on.",
     "Legt die Schwelle fest, ab der die rote Fehleranzeige aktiviert wird.",
     "Establece el umbral para que se encienda el indicador de error rojo.",
@@ -456,7 +459,7 @@ const QStringList SHOW_RED_TEXT = {
     "Показать красный индикаторный текст"
 };
 
-const QStringList SHOW_RED_TEXT_DESC = {
+const QStringList SHOW_RED_TEXT_HINT = {
     "Enables or disables display of the space level text in the round red indicator.",
     "Aktiviert oder deaktiviert die Anzeige des Raumstufen-Textes im runden roten Indikator.",
     "Habilita o deshabilita la visualización del texto del nivel de espacio en el indicador redondo rojo.",
@@ -480,7 +483,7 @@ const QStringList SHOW_RED_DIALOG = {
     "Показать диалог с красным индикатором"
 };
 
-const QStringList SHOW_RED_DIALOG_DESC = {
+const QStringList SHOW_RED_DIALOG_HINT = {
     "Enables or disables display of the red warning dialog.",
     "Aktiviert oder deaktiviert die Anzeige des roten Warnfensters.",
     "Habilita o deshabilita la visualización del cuadro de diálogo de advertencia rojo.",
@@ -504,7 +507,7 @@ const QStringList SHOW_TEXT_INDICATOR = {
     "Показать индикатор текста"
 };
 
-const QStringList SHOW_TEXT_INDICATOR_DESC = {
+const QStringList SHOW_TEXT_INDICATOR_HINT = {
     "Enables or disables display of the space level text.",
     "Aktiviert oder deaktiviert die Anzeige des Raum-Level-Textes.",
     "Habilita o deshabilita la visualización del texto del nivel de espacio.",
@@ -528,7 +531,7 @@ const QStringList INDICATOR_UPDATE_MINS = {
     "Время между обновлениями индикатора"
 };
 
-const QStringList INDICATOR_UPDATE_MINS_DESC = {
+const QStringList INDICATOR_UPDATE_MINS_HINT = {
     "Sets duration between low space indicators and warnings checks.",
     "Legt die Dauer zwischen den Prüfungen von niedrigen Speicheranzeigen und Warnungen fest.",
     "Establece la duración entre los indicadores de espacio bajo y las comprobaciones de advertencias.",
@@ -552,7 +555,7 @@ const QStringList SHOW_ICON_INDICATOR = {
     "Показать значок, когда нет индикаторов"
 };
 
-const QStringList SHOW_ICON_INDICATOR_DESC = {
+const QStringList SHOW_ICON_INDICATOR_HINT = {
     "Enables or disables display of the widget icon when no indicator is otherwise displayed.",
     "Aktiviert oder deaktiviert die Anzeige des Widget-Symbols, wenn ansonsten kein Indikator angezeigt wird.",
     "Habilita o deshabilita la visualización del ícono del widget cuando no se muestra ningún indicador.",
@@ -576,7 +579,7 @@ const QStringList SHOW_SETTINGS_HINTS = {
     "Показать подсказки настроек"
 };
 
-const QStringList SHOW_SETTINGS_HINTS_DESC = {
+const QStringList SHOW_SETTINGS_HINTS_HINT = {
     "Enables or disables display of these descriptions of settings on mouse hover.",
     "Aktiviert oder deaktiviert die Anzeige dieser Beschreibungen von Einstellungen beim Überfahren mit der Maus.",
     "Habilita o deshabilita la visualización de estas descripciones de configuraciones al pasar el ratón por encima.",
@@ -600,7 +603,7 @@ const QStringList SHOW_ICONS_ON_BUTTONS = {
     "Показывать значки на кнопках"
 };
 
-const QStringList SHOW_ICONS_ON_BUTTONS_DESC = {
+const QStringList SHOW_ICONS_ON_BUTTONS_HINT = {
     "Enables or disables display of visual icons on buttons.",
     "Aktiviert oder deaktiviert die Anzeige von visuellen Symbolen auf Schaltflächen.",
     "Habilita o deshabilita la visualización de iconos visuales en los botones.",
@@ -630,33 +633,33 @@ const std::vector<QStringList> ALL_TRANSLATIONS = {
     /*
      * Second block - Configuration Dialog translations.
      */
-    APP_LANGUAGE, APP_LANGUAGE_DESC,
+    APP_LANGUAGE, APP_LANGUAGE_HINT,
 
-    INDICATOR_MARGIN_SIZE, INDICATOR_MARGIN_SIZE_DESC,
-    INDICATOR_SHRINKS_TO_ROW, INDICATOR_SHRINKS_TO_ROW_DESC,
-    INDICATOR_SIZE, INDICATOR_SIZE_DESC,
-    INDICATOR_TEXT_SIZE, INDICATOR_TEXT_SIZE_DESC,
+    INDICATOR_MARGIN_SIZE, INDICATOR_MARGIN_SIZE_HINT,
+    INDICATOR_SHRINKS_TO_ROW, INDICATOR_SHRINKS_TO_ROW_HINT,
+    INDICATOR_SIZE, INDICATOR_SIZE_HINT,
+    INDICATOR_TEXT_SIZE, INDICATOR_TEXT_SIZE_HINT,
 
-    SHOW_GREEN_INDICATOR, SHOW_GREEN_INDICATOR_DESC,
-    SHOW_GREEN_TEXT, SHOW_GREEN_TEXT_DESC,
+    SHOW_GREEN_INDICATOR, SHOW_GREEN_INDICATOR_HINT,
+    SHOW_GREEN_TEXT, SHOW_GREEN_TEXT_HINT,
 
-    SHOW_YELLOW_INDICATOR, SHOW_YELLOW_INDICATOR_DESC,
-    SHOW_YELLOW_AT_THRESHOLD, SHOW_YELLOW_AT_THRESHOLD_DESC,
-    SHOW_YELLOW_TEXT, SHOW_YELLOW_TEXT_DESC,
-    SHOW_YELLOW_DIALOG, SHOW_YELLOW_DIALOG_DESC,
+    SHOW_YELLOW_INDICATOR, SHOW_YELLOW_INDICATOR_HINT,
+    SHOW_YELLOW_AT_THRESHOLD, SHOW_YELLOW_AT_THRESHOLD_HINT,
+    SHOW_YELLOW_TEXT, SHOW_YELLOW_TEXT_HINT,
+    SHOW_YELLOW_DIALOG, SHOW_YELLOW_DIALOG_HINT,
 
-    SHOW_RED_INDICATOR, SHOW_RED_INDICATOR_DESC,
-    SHOW_RED_AT_THRESHOLD, SHOW_RED_AT_THRESHOLD_DESC,
-    SHOW_RED_TEXT, SHOW_RED_TEXT_DESC,
-    SHOW_RED_DIALOG, SHOW_RED_DIALOG_DESC,
+    SHOW_RED_INDICATOR, SHOW_RED_INDICATOR_HINT,
+    SHOW_RED_AT_THRESHOLD, SHOW_RED_AT_THRESHOLD_HINT,
+    SHOW_RED_TEXT, SHOW_RED_TEXT_HINT,
+    SHOW_RED_DIALOG, SHOW_RED_DIALOG_HINT,
 
-    SHOW_TEXT_INDICATOR, SHOW_TEXT_INDICATOR_DESC,
+    SHOW_TEXT_INDICATOR, SHOW_TEXT_INDICATOR_HINT,
 
-    INDICATOR_UPDATE_MINS, INDICATOR_UPDATE_MINS_DESC,
+    INDICATOR_UPDATE_MINS, INDICATOR_UPDATE_MINS_HINT,
 
-    SHOW_ICON_INDICATOR, SHOW_ICON_INDICATOR_DESC,
-    SHOW_SETTINGS_HINTS, SHOW_SETTINGS_HINTS_DESC,
-    SHOW_ICONS_ON_BUTTONS, SHOW_ICONS_ON_BUTTONS_DESC,
+    SHOW_ICON_INDICATOR, SHOW_ICON_INDICATOR_HINT,
+    SHOW_SETTINGS_HINTS, SHOW_SETTINGS_HINTS_HINT,
+    SHOW_ICONS_ON_BUTTONS, SHOW_ICONS_ON_BUTTONS_HINT,
 
     /*
      * Second block - About Dialog translations.

@@ -29,7 +29,7 @@ AboutDialog::AboutDialog(PluginSettings* settings, QWidget* parent) :
 
     // Set title & icon.
     setWindowFlags(Qt::Dialog | Qt::Tool);
-    setWindowTitle(tr("About") + QString(" ") + mSettings->group());
+    setWindowTitle(tr("About") + QString(" ") + DESKTOP_NAME);
     setWindowIcon(QIcon::fromTheme(APP_ICON));
 
     // Create overall container.
@@ -38,7 +38,7 @@ AboutDialog::AboutDialog(PluginSettings* settings, QWidget* parent) :
     mainLayout->addSpacing(20);
 
     // App title line.
-    QLabel* appTitleLine = new QLabel(QString(APP_NAME), this);
+    QLabel* appTitleLine = new QLabel(QString(DESKTOP_NAME), this);
     appTitleLine->setAlignment(Qt::AlignCenter);
     appTitleLine->setWordWrap(true);
     QFont appTitleFont = appTitleLine->font();
@@ -111,7 +111,6 @@ AboutDialog::AboutDialog(PluginSettings* settings, QWidget* parent) :
     // Create Ok / Cancel ButtonBoxBox with a Repo button.
     const bool SHOULD_DISPLAY_ICONS = mConfigDialog->
         getBoolSetting(ConfigDialog::SHOW_ICONS_ON_BUTTONS);
-
     QDialogButtonBox* buttonBox = new QDialogButtonBox(
         QDialogButtonBox::Ok, this);
 
@@ -129,11 +128,12 @@ AboutDialog::AboutDialog(PluginSettings* settings, QWidget* parent) :
     } else {
         repoButton->setIcon(QIcon());
     }
-    buttonBox->addButton(repoButton, QDialogButtonBox::ActionRole);
 
     // Connect Ok and Repo signals.
+    buttonBox->addButton(repoButton, QDialogButtonBox::ActionRole);
     connect(buttonBox, &QDialogButtonBox::accepted, this,
         &QDialog::accept);
+
     connect(repoButton, &QPushButton::clicked, this, [this]() {
         QDesktopServices::openUrl(QUrl(QStringLiteral(SOURCE_REPO)));
         this->close();
